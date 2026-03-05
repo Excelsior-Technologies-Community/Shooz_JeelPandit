@@ -31,6 +31,7 @@
 .mega-menu {
   position: absolute;
   left: 0;
+  background-color: white;
   top: 100%;
   width: 100%;
   display: none;

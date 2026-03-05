@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/header.css";
 
 const Header = () => {
+  const BUY_NOW_URL = "https://qx-shooz.myshopify.com/collections/all";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileSection, setOpenMobileSection] = useState(null);
 
@@ -50,9 +51,10 @@ const Header = () => {
             <i className="bi bi-list"></i>
           </button>
 
-          <a className="navbar-brand fw-bold fs-3" href="#">
-            SHOZ
-          </a>
+          <img
+            className="navbar-brand fw-bold fs-3"
+            src="https://qx-shooz.myshopify.com/cdn/shop/files/logo.png?v=1731409697&width=250"
+          />
 
           <div className="collapse navbar-collapse" id="navbarContent">
             {/* Center Menu */}
@@ -299,7 +301,7 @@ const Header = () => {
 
               {/* BUY NOW */}
               <li className="nav-item position-relative">
-                <a className="nav-link fw-semibold" href="#">
+                <a className="nav-link fw-semibold" href={"#"}>
                   Buy Now
                 </a>
                 <span className="badge bg-success sale-badge">Sale</span>
@@ -348,9 +350,11 @@ const Header = () => {
 
       <aside className={`mobile-offcanvas ${isMobileMenuOpen ? "show" : ""}`}>
         <div className="mobile-offcanvas-header">
-          <a className="navbar-brand fw-bold fs-3 m-0" href="#">
-            SHOZ
-          </a>
+          <img
+            className="navbar-brand fw-bold fs-3 m-0"
+            src="https://qx-shooz.myshopify.com/cdn/shop/files/logo.png?v=1731409697&width=250"
+          />
+
           <button
             type="button"
             className="mobile-close-btn"
@@ -513,7 +517,7 @@ const Header = () => {
           </li>
 
           <li>
-            <a href="#" onClick={closeMobileMenu}>
+            <a href={BUY_NOW_URL} onClick={closeMobileMenu}>
               Buy Now
             </a>
           </li>
