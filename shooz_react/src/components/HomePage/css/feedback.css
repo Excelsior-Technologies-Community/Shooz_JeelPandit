@@ -1,0 +1,144 @@
+.feedback-section {
+  background: #f3f3f38d;
+  padding: 85px 5% 95px;
+  margin-bottom: 50px;
+}
+
+.feedback-header {
+  max-width: 760px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+
+.feedback-header h2 {
+  margin: 0 0 20px;
+  color: #111;
+  font-size: 62px;
+  line-height: 1.05;
+  letter-spacing: -0.8px;
+  font-weight: 700;
+}
+
+.feedback-header p {
+  margin: 0 auto;
+  max-width: 620px;
+  color: #707070;
+  font-size: 21px;
+  line-height: 1.45;
+}
+
+.feedback-grid {
+  max-width: 1720px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.feedback-card {
+  height: 128px;
+  /* background: #f7f7f7; */
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  padding: 18px 24px;
+}
+
+.feedback-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.5);
+}
+
+.feedback-card img:hover {
+  transform: scale(1.05);
+  transition: 0.5s;
+  filter: opacity(1);
+  cursor: pointer;
+}
+
+@media (max-width: 1399.98px) {
+  .feedback-header h2 {
+    font-size: 54px;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .feedback-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .feedback-header h2 {
+    font-size: 48px;
+  }
+
+  .feedback-header p {
+    font-size: 19px;
+  }
+
+  .feedback-card {
+    height: 112px;
+  }
+
+  .feedback-card img {
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .feedback-section {
+    padding: 70px 5% 80px;
+  }
+
+  .feedback-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .feedback-header {
+    margin-bottom: 38px;
+  }
+
+  .feedback-header h2 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .feedback-section {
+    padding: 52px 20px 60px;
+  }
+
+  .feedback-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .feedback-header {
+    margin-bottom: 30px;
+  }
+
+  .feedback-header h2 {
+    font-size: 34px;
+    margin-bottom: 12px;
+  }
+
+  .feedback-header p {
+    font-size: 16px;
+  }
+
+  .feedback-card {
+    height: 96px;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .feedback-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feedback-card {
+    height: 88px;
+  }
+}

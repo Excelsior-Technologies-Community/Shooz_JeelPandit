@@ -1,0 +1,288 @@
+.popular-section {
+  padding: 80px 5%;
+  /* background: #f1f1f1; */
+  overflow-x: hidden;
+}
+
+.popular-container {
+  width: 100%;
+  max-width: 1600px;
+  /* margin: 0; */
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  align-items: center;
+  gap: 48px;
+}
+
+.popular-text {
+  min-width: 0;
+  max-width: 700px;
+}
+
+.popular-small {
+  margin: 0;
+  letter-spacing: 4px;
+  font-size: 12px;
+  color: #111;
+}
+
+.popular-title {
+  margin: 18px 0 26px;
+  font-size: 48px;
+  line-height: 1.06;
+  letter-spacing: -0.5px;
+  color: #000;
+}
+
+.popular-desc {
+  margin: 0 0 26px;
+  color: #111;
+  line-height: 1.55;
+  font-size: 18px;
+  max-width: 680px;
+}
+
+.shop-btn {
+  margin-top: 10px;
+  padding: 13px 28px;
+  border: 0;
+  background: #b24452;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.shop-btn:hover {
+  background: black;
+}
+
+.popular-images {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.img-left {
+  width: min(100%, 780px);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  display: block;
+  margin-top: 0;
+}
+
+.store-banner {
+  margin-top: 48px;
+  width: 100vw;
+
+  max-width: none;
+  margin-left: 50%;
+  margin-right: 0;
+  transform: translateX(-50%);
+
+  padding: 18px 40px;
+  background: linear-gradient(90deg, #6d5bb6 0%, #be3c48 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.store-banner p {
+  margin: 0;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.store-banner button {
+  border: 0;
+  background: #4d4f9e;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  font-size: 16px;
+  padding: 18px 32px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.video-img {
+  position: relative;
+  width: 300px;
+  max-width: none;
+  margin-top: 32px;
+  margin-left: 0;
+}
+
+.video-img img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+  width: 110px;
+  aspect-ratio: 1 / 1;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.play-icon {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 16px solid #fff;
+  margin-left: 4px;
+}
+
+@media (max-width: 1199.98px) {
+  .popular-title {
+    font-size: 44px;
+  }
+
+  .shop-btn {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .popular-container {
+    grid-template-columns: 1fr;
+  }
+
+  .popular-text {
+    order: 1;
+  }
+
+  .popular-images {
+    order: 2;
+    justify-content: flex-start;
+  }
+
+  .img-left {
+    width: min(100%, 720px);
+    margin-top: 0;
+  }
+
+  .video-img {
+    width: 260px;
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .popular-section {
+    padding: 48px 20px;
+  }
+
+  .popular-title {
+    margin: 14px 0 20px;
+    font-size: 36px;
+  }
+
+  .popular-desc {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .shop-btn {
+    font-size: 17px;
+    padding: 12px 22px;
+  }
+
+  .popular-images {
+    gap: 14px;
+  }
+
+  .img-left {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .video-img {
+    width: 220px;
+    margin-top: 12px;
+    margin-left: 0;
+  }
+
+  .play-btn {
+    left: 20%;
+    width: 82px;
+  }
+
+  .play-icon {
+    border-top-width: 8px;
+    border-bottom-width: 8px;
+    border-left-width: 13px;
+  }
+
+  .store-banner {
+    padding: 18px 18px;
+    gap: 12px;
+  }
+
+  .store-banner p {
+    font-size: 20px;
+  }
+
+  .store-banner button {
+    padding: 14px 20px;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .popular-title {
+    font-size: 30px;
+  }
+
+  .popular-desc {
+    font-size: 15px;
+  }
+
+  .popular-images {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .img-left,
+  .video-img {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .play-btn {
+    left: 50%;
+    width: 74px;
+  }
+
+  .store-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .store-banner button {
+    width: 100%;
+  }
+}
