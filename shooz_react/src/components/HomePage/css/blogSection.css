@@ -1,0 +1,161 @@
+.blog-section {
+  padding: 60px 5%;
+  margin-bottom: 60px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.blog-header {
+  max-width: 550px;
+}
+
+.small-title {
+  letter-spacing: 0.2em;
+  color: #6d7680;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.blog-title {
+  margin: 20px 0 16px;
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 1.1;
+  color: #0e1116;
+}
+
+.desc {
+  color: #6a7280;
+  max-width: 420px;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.blog-container {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+}
+
+.big-post {
+  position: relative;
+  overflow: hidden;
+  min-height: 350px;
+  cursor: pointer;
+}
+
+.big-post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.big-post:hover img {
+  transform: scale(1.08);
+}
+
+.big-post-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to top,
+    rgba(13, 13, 13, 0.7) 8%,
+    rgba(13, 13, 13, 0.24) 45%,
+    rgba(13, 13, 13, 0) 100%
+  );
+}
+
+.big-post-text {
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+  color: white;
+}
+
+.big-post-text h3 {
+  margin-top: 10px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.post-meta-dark {
+  color: #6b7280;
+}
+
+.comment-icon {
+  font-size: 14px;
+}
+
+.small-posts {
+  display: grid;
+  gap: 24px;
+}
+
+.small-post {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.small-img {
+  overflow: hidden;
+}
+
+.small-img img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.small-post:hover img {
+  transform: scale(1.08);
+}
+
+.small-text h4 {
+  margin-top: 10px;
+  font-size: 25px;
+  font-weight: 600;
+  color: #0f1217;
+  line-height: 1.4;
+}
+
+.small-text h4:hover {
+  color: #ae3f4f;
+}
+
+@media (max-width: 1100px) {
+  .blog-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .small-post {
+    grid-template-columns: 1fr;
+  }
+
+  .small-img img {
+    height: 200px;
+  }
+
+  .big-post {
+    min-height: 400px;
+  }
+
+  .big-post-text {
+    left: 20px;
+    bottom: 20px;
+  }
+}
