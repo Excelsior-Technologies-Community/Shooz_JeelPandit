@@ -14,6 +14,7 @@
 
 .nav-link.active {
   color: #e63946 !important;
+
   border-bottom: 2px solid #e63946;
 }
 
@@ -34,6 +35,7 @@
   background-color: white;
   top: 100%;
   width: 100%;
+
   max-width: 100vw;
   display: none;
   z-index: 999;

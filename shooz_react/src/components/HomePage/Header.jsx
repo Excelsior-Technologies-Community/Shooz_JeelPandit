@@ -1,6 +1,6 @@
 ﻿import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { Link } from "react-router-dom";
 import "./css/header.css";
 
 const Header = () => {
@@ -77,7 +77,9 @@ const Header = () => {
                       <div className="col-lg-2">
                         <h6 className="mega-title">Layout</h6>
                         <ul className="mega-links">
-                          <li>Filter Sidebar</li>
+                          <li>
+                            <Link to="/ProductPage"> Filter Sidebar</Link>
+                          </li>
                           <li>Filter Top</li>
                           <li>Filter Drawer</li>
                           <li>Without Filter</li>
