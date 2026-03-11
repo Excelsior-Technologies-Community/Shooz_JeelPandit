@@ -8,7 +8,11 @@
     "color": "white",
     "image": "https://qx-shooz.myshopify.com/cdn/shop/files/product-4_a9f5532a-47cd-4f32-8958-57ee765f0a27.jpg?v=1731311278&width=720",
     "hoverImage": "https://qx-shooz.myshopify.com/cdn/shop/files/product-19_323f61e6-cfd6-4407-823a-273f154d188c.jpg?v=1731311295&width=720",
-    "sizes": [7, 8, 9, 10, 11]
+    "sizes": [7, 8, 9, 10, 11],
+    "vendor": "Nike",
+    "Type": "Slip-Ons",
+    "Sku": "",
+    "Available": true
   },
   {
     "id": 2,
@@ -19,7 +23,11 @@
     "color": "black",
     "image": "https://qx-shooz.myshopify.com/cdn/shop/files/product-17.jpg?v=1731315215&width=720",
     "hoverImage": "https://qx-shooz.myshopify.com/cdn/shop/files/product-23_8eeee338-7bad-4c2b-b296-6804d886a41a.jpg?v=1731315325&width=720",
-    "sizes": [8, 9, 10, 11, 12]
+    "sizes": [8, 9, 10, 11, 12],
+    "vendor": "Nike",
+    "Type": "Slip-Ons",
+    "Sku": "",
+    "Available": true
   },
   {
     "id": 3,
@@ -30,7 +38,11 @@
     "color": "black",
     "image": "https://qx-shooz.myshopify.com/cdn/shop/files/product-3_be4a38ab-621f-46d5-a126-3488687e10f6.jpg?v=1731311211&width=720",
     "hoverImage": "https://qx-shooz.myshopify.com/cdn/shop/files/product-26_a72ab182-4323-4754-aa41-d64401571e17.jpg?v=1731311225&width=720",
-    "sizes": [7, 8, 9]
+    "sizes": [7, 8, 9],
+    "vendor": "Nike",
+    "Type": "Slip-Ons",
+    "Sku": "",
+    "Available": true
   },
   {
     "id": 4,
@@ -39,9 +51,13 @@
     "brand": "TrendyFeet",
     "category": "sneakers",
     "color": "red",
-    "image": "http://qx-shooz.myshopify.com/cdn/shop/files/product-7_bf9fee80-650d-4775-a219-0eaccf66d47b.jpg?v=1731311538&width=720",
+    "image": "https://qx-shooz.myshopify.com/cdn/shop/files/product-7_bf9fee80-650d-4775-a219-0eaccf66d47b.jpg?v=1731311538&width=720",
     "hoverImage": "https://qx-shooz.myshopify.com/cdn/shop/files/product-19_49ae4265-2610-48a8-b934-1a24b6136832.jpg?v=1731311550&width=720",
-    "sizes": [9, 10, 11]
+    "sizes": [9, 10, 11],
+    "vendor": "Nike",
+    "Type": "Slip-Ons",
+    "Sku": "",
+    "Available": true
   },
   {
     "id": 5,
@@ -52,6 +68,10 @@
     "color": "blue",
     "image": "https://qx-shooz.myshopify.com/cdn/shop/files/product-20.jpg?v=1731315339&width=720",
     "hoverImage": "https://qx-shooz.myshopify.com/cdn/shop/files/product-22.jpg?v=1731315349&width=720",
-    "sizes": [8, 9, 10]
+    "sizes": [8, 9, 10],
+    "vendor": "Nike",
+    "Type": "Slip-Ons",
+    "Sku": "",
+    "Available": true
   }
 ]

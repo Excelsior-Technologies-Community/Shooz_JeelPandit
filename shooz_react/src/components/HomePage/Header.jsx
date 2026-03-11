@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+﻿﻿﻿import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import "./css/header.css";
@@ -78,10 +78,12 @@ const Header = () => {
                         <h6 className="mega-title">Layout</h6>
                         <ul className="mega-links">
                           <li>
-                            <Link to="/ProductPage"> Filter Sidebar</Link>
+                            <Link to="/FilterSideBar">Filter Sidebar</Link>
+                          </li>
+                          <li>
+                            <Link to="/FilterDrawer">Filter Drawer</Link>
                           </li>
                           <li>Filter Top</li>
-                          <li>Filter Drawer</li>
                           <li>Without Filter</li>
                           <li>Collection - 2 Columns</li>
                           <li>Collection - 3 Columns</li>

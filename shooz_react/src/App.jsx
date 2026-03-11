@@ -1,12 +1,14 @@
 ﻿import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
-import ProductPage from "./Pages/ProductPage";
+import FilterSideBarPage from "./Pages/FilterSideBarPage";
+import FilterDrawerPage from "./Pages/FilterDrawerPage";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/ProductPage" element={<ProductPage />} />
+      <Route path="/FilterSideBar" element={<FilterSideBarPage />} />
+      <Route path="/FilterDrawerPage" element={<FilterDrawerPage />} />
     </Routes>
   );
 }
