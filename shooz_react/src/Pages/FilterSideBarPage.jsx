@@ -3,7 +3,7 @@ import Header from "../components/HomePage/Header";
 import ProductsNav from "../components/ProductPage/ProductsNav";
 import Breadcrumb from "../components/Breadcurms";
 import FilterSideBar from "../components/ProductPage/FilterSideBar";
-// import Footer from "../components/HomePage/Footer";
+import FooterSimple from "../components/HomePage/FooterSimple";
 
 const FilterSideBarPage = () => {
   return (
@@ -12,7 +12,7 @@ const FilterSideBarPage = () => {
       <Breadcrumb title={"Filter SideBar Page"} />
       <ProductsNav />
       <FilterSideBar />
-      {/* <Foote/> */}
+      <FooterSimple />
     </>
   );
 };

@@ -78,10 +78,10 @@ const Header = () => {
                         <h6 className="mega-title">Layout</h6>
                         <ul className="mega-links">
                           <li>
-                            <Link to="/FilterSideBar">Filter Sidebar</Link>
+                            <Link to="/FilterSideBarPage">Filter Sidebar</Link>
                           </li>
                           <li>
-                            <Link to="/FilterDrawer">Filter Drawer</Link>
+                            <Link to="/FilterDrawerPage">Filter Drawer</Link>
                           </li>
                           <li>Filter Top</li>
                           <li>Without Filter</li>

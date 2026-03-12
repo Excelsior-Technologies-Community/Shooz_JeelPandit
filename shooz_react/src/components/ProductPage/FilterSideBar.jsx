@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import productsData from "../../../Products.json";
+import { Link, useNavigate } from "react-router-dom";
 import "./css/filterSide.css";
 import { BsCartPlus, BsEye, BsHeart, BsArrowRepeat } from "react-icons/bs";
 
 function FilterSideBar() {
+  const navigate = useNavigate();
   const maxPrice = Math.ceil(Math.max(...productsData.map((p) => p.price)));
 
   const [filters, setFilters] = useState({
@@ -52,6 +54,14 @@ function FilterSideBar() {
       color: [],
       priceRange: maxPrice,
     });
+  };
+
+  const handleCardClick = (id) => {
+    navigate(`/product/${id}`);
+  };
+
+  const stopCardClick = (event) => {
+    event.stopPropagation();
   };
 
   /* ---------------- FILTER PRODUCTS ---------------- */
@@ -410,46 +420,72 @@ function FilterSideBar() {
         </div>
 
         {filteredProducts.length > 0 ? (
-          <div
-            className="products-grid grid"
-            style={{ gridTemplateColumns: `repeat(${viewMode}, 1fr)` }}
-          >
+          <div className="products-grid grid" style={{ "--cols": viewMode }}>
             {filteredProducts.map((product) => (
-              <div className="product-card" key={product.id}>
+              <div
+                className="product-card"
+                key={product.id}
+                role="button"
+                tabIndex={0}
+                onClick={() => handleCardClick(product.id)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    handleCardClick(product.id);
+                  }
+                }}
+              >
                 <div className="product-card-media">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="product-card-main-image"
-                  />
+                  <Link to={`/product/${product.id}`}>
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="product-card-main-image"
+                    />
+                  </Link>
                   <img
                     src={product.hoverImage || product.image}
                     alt={product.title}
                     className="product-card-hover-image"
                   />
                   <div className="product-card-footer-actions">
-                    <button type="button" className="add-to-cart-btn">
+                    <button
+                      type="button"
+                      className="add-to-cart-btn"
+                      onClick={stopCardClick}
+                    >
                       <BsCartPlus />
                       <span>ADD TO CART</span>
                     </button>
                     <div className="product-card-action-icons">
-                      <button aria-label="Quick view">
+                      <button aria-label="Quick view" onClick={stopCardClick}>
                         <BsEye />
                       </button>
-                      <button aria-label="Add to wishlist">
+                      <button
+                        aria-label="Add to wishlist"
+                        onClick={stopCardClick}
+                      >
                         <BsHeart />
                       </button>
-                      <button aria-label="Compare product">
+                      <button
+                        aria-label="Compare product"
+                        onClick={stopCardClick}
+                      >
                         <BsArrowRepeat />
                       </button>
                     </div>
                   </div>
                 </div>
                 <div className="product-card-content">
-                  <p className="product-card-price">
-                    ${Number(product.price).toFixed(2)}
-                  </p>
-                  <h3 className="product-card-title">{product.title}</h3>
+                  <Link
+                    to={`/product/${product.id}`}
+                    className="product-title-link"
+                  >
+                    <p className="product-card-price">
+                      ${Number(product.price).toFixed(2)}
+                    </p>
+                    <h3 className="product-card-title">{product.title}</h3>
+                  </Link>
                   <p className="product-card-brand">{product.brand}</p>
                 </div>
               </div>

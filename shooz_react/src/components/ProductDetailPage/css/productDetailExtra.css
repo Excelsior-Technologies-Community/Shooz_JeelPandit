@@ -1,0 +1,132 @@
+.product-extra {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 80px 80px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+  gap: 60px;
+  font-family: "Poppins", sans-serif;
+}
+
+.product-tabs {
+  display: flex;
+  gap: 50px;
+  border-bottom: 1px solid #e1e4e8;
+  margin-bottom: 20px;
+}
+
+.product-tabs button {
+  border: none;
+  background: none;
+  padding: 0 0 12px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #333;
+  position: relative;
+}
+
+.product-tabs button.active {
+  font-weight: 600;
+}
+
+.product-tabs button.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: #111;
+}
+
+.tab-panel {
+  color: #4a4a4a;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.tab-panel p {
+  margin: 0 0 16px;
+}
+
+.product-extra-right h3 {
+  font-size: 22px;
+  margin: 0 0 18px;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.related-card {
+  display: grid;
+  gap: 12px;
+}
+
+.related-image {
+  display: block;
+  background: #fbf7f5;
+  border-radius: 6px;
+  padding: 18px;
+}
+
+.related-image img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+}
+
+.related-title {
+  display: inline-block;
+  color: #111;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.related-price {
+  margin: 6px 0 2px;
+  font-size: 16px;
+}
+
+.related-add {
+  border: none;
+  background: none;
+  color: #7a7a7a;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (max-width: 1100px) {
+  .product-extra {
+    grid-template-columns: 1fr;
+    padding: 20px 30px 70px;
+    gap: 40px;
+  }
+
+  .related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .product-extra {
+    padding: 16px 18px 60px;
+  }
+
+  .product-tabs {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .product-tabs button {
+    font-size: 16px;
+  }
+
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+}
