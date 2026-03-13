@@ -7,12 +7,12 @@ import {
   BsCartPlus,
   BsEye,
   BsHeart,
-  BsArrowRepeat,
   BsFilter,
   BsX,
   BsChevronLeft,
   BsChevronRight,
 } from "react-icons/bs";
+import { FaExchangeAlt } from "react-icons/fa";
 
 function FilterDrawer() {
   const navigate = useNavigate();
@@ -55,8 +55,6 @@ function FilterDrawer() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  /* FILTER CHANGE */
 
   const handleFilterChange = (type, value) => {
     if (type === "priceRange") {
@@ -418,11 +416,17 @@ function FilterDrawer() {
                       <button aria-label="Quick view" onClick={stopCardClick}>
                         <BsEye />
                       </button>
-                      <button aria-label="Add to wishlist" onClick={stopCardClick}>
+                      <button
+                        aria-label="Add to wishlist"
+                        onClick={stopCardClick}
+                      >
                         <BsHeart />
                       </button>
-                      <button aria-label="Compare product" onClick={stopCardClick}>
-                        <BsArrowRepeat />
+                      <button
+                        aria-label="Compare product"
+                        onClick={stopCardClick}
+                      >
+                        <FaExchangeAlt />
                       </button>
                     </div>
                   </div>

@@ -1,0 +1,497 @@
+.clasic_faqs {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 50px 80px;
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+.left_side {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  flex: 1 1 52%;
+}
+
+.faq_img_main {
+  width: 70%;
+  height: 550px;
+  object-fit: cover;
+  display: block;
+  max-width: 100%;
+}
+
+.faq_img_overlay {
+  position: absolute;
+  right: 12%;
+  bottom: 150px;
+  width: 42%;
+  height: 250px;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.right_side p:first-of-type {
+  margin: 0 0 12px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #7a7a7a;
+  font-weight: 600;
+}
+
+.right_side {
+  flex: 1 1 48%;
+}
+
+.right_side h3 {
+  margin: 0 0 16px;
+  font-size: 34px;
+  line-height: 1.2;
+  color: #111111;
+}
+
+.right_side p {
+  margin: 0 0 22px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #4a4a4a;
+}
+
+.discover {
+  border: none;
+  background: #b6465a;
+  color: #ffffff;
+  padding: 12px 26px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.discover:hover {
+  background: black;
+}
+
+.facility_explore {
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  margin-top: 30px;
+}
+
+.facility {
+  background-color: #e3e3e3;
+  max-width: 100%;
+  padding: 28px 50px;
+  display: flex;
+  gap: 24px;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.list_facility {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  flex: 1 1 200px;
+  max-width: 260px;
+}
+
+.facility_icon {
+  font-size: 34px;
+  color: #333333;
+  line-height: 1;
+}
+
+.list_facility h4 {
+  margin: 6px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #222222;
+}
+
+.list_facility p {
+  margin: 0;
+  font-size: 14px;
+  color: #7a7a7a;
+}
+
+.vid_banner {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  background: #111111;
+}
+
+.vid_banner video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vid_overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.vid_content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  padding: 24px;
+  gap: 12px;
+}
+
+.vid_kicker {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+.vid_content h2 {
+  margin: 0;
+  font-size: 42px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.vid_subtitle {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.faqs {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 50px 50px;
+  font-family: "Poppins", sans-serif;
+}
+.faqs_header {
+  text-align: center;
+}
+
+.faqs_header h1 {
+  margin: 0 0 6px;
+  font-size: 32px;
+  color: #111111;
+}
+
+.faqs_header p {
+  margin: 0 0 18px;
+  color: #7a7a7a;
+}
+.faqs .accordion-item {
+  border: none;
+  border-top: 1px solid #e6e6e6;
+}
+
+.faqs .accordion-item:last-child {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.faqs .accordion-button {
+  padding: 20px 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #111111;
+  background: transparent;
+  box-shadow: none;
+}
+
+.faqs .accordion-button::after {
+  content: "+";
+  background-image: none;
+  font-size: 24px;
+  font-weight: 400;
+  color: #111111;
+  transform: none;
+}
+
+.faqs .accordion-button:not(.collapsed)::after {
+  content: "−";
+}
+
+.faqs .accordion-body {
+  padding: 0 0 18px;
+  color: #5a5a5a;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.sale_event {
+  padding: 20px 50px 70px;
+}
+
+.sale_event__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #0c0c0c;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 28px 36px;
+}
+
+.sale_event__text h3 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.sale_event__text p {
+  margin: 0;
+  color: #d8d8d8;
+  font-size: 15px;
+}
+
+.sale_event__badge {
+  background: #f3e4b1;
+  color: #111111;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.sale_event__cta {
+  border: 1px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  padding: 12px 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.alsoLike {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 50px 80px;
+  text-align: center;
+}
+
+.alsoLike h1 {
+  margin: 0 0 30px;
+  font-size: 32px;
+  color: #111111;
+}
+
+.alsoLike .add-to-cart-btn {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.alsoLike .add-to-cart-btn span {
+  font-size: 11px;
+}
+
+.recently_viewed {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 50px 90px;
+  text-align: center;
+}
+
+.recently_viewed h2 {
+  margin: 0 0 30px;
+  font-size: 32px;
+  color: #111111;
+}
+
+.recently_grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  justify-items: center;
+}
+
+.recently_viewed .product-card {
+  width: 100%;
+  max-width: 260px;
+}
+
+.recently_viewed .product-card-footer-actions {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .clasic_faqs {
+    padding: 10px 30px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left_side {
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .faq_img_main {
+    width: 100%;
+    position: relative;
+    height: 500px;
+  }
+
+  .faq_img_overlay {
+    position: absolute;
+    left: 60%;
+    object-fit: cover;
+    bottom: 150px;
+    width: 50%;
+    height: 200px;
+  }
+
+  .right_side {
+    text-align: center;
+  }
+
+  .right_side p {
+    text-align: center;
+  }
+
+  .facility {
+    padding: 30px;
+    justify-content: center;
+  }
+
+  .vid_banner {
+    height: 360px;
+  }
+
+  .vid_content h2 {
+    font-size: 34px;
+  }
+
+  .faqs {
+    padding: 30px;
+  }
+
+  .sale_event {
+    padding: 20px 30px 60px;
+  }
+
+  .sale_event__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .alsoLike {
+    padding: 20px 30px 70px;
+  }
+
+  .recently_viewed {
+    padding: 10px 30px 80px;
+  }
+
+  .recently_grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .clasic_faqs {
+    padding: 45px 18px;
+    gap: 30px;
+    justify-items: center;
+  }
+
+  .faq_img_main {
+    width: 100%;
+    height: 320px;
+  }
+
+  .faq_img_overlay {
+    position: absolute;
+    right: 6%;
+    bottom: 50px;
+    width: 40%;
+    height: 150px;
+  }
+
+  .right_side h3 {
+    font-size: 24px;
+  }
+
+  .right_side {
+    text-align: center;
+  }
+
+  .right_side p {
+    text-align: center;
+  }
+
+  .facility {
+    padding: 26px 18px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .vid_banner {
+    height: 300px;
+  }
+
+  .vid_content h2 {
+    font-size: 26px;
+  }
+
+  .vid_subtitle {
+    font-size: 14px;
+  }
+
+  .faqs {
+    padding: 26px 18px 50px;
+  }
+
+  .sale_event {
+    padding: 18px 18px 50px;
+  }
+
+  .sale_event__inner {
+    padding: 24px;
+  }
+
+  .alsoLike {
+    padding: 18px 18px 60px;
+  }
+
+  .alsoLike h1 {
+    font-size: 26px;
+  }
+
+  .recently_viewed {
+    padding: 10px 18px 70px;
+  }
+
+  .recently_viewed h2 {
+    font-size: 24px;
+  }
+
+  .recently_grid {
+    grid-template-columns: 1fr;
+  }
+}

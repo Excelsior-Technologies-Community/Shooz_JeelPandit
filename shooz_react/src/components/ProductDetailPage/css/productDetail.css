@@ -310,3 +310,39 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+.product-info .accordion-button::after {
+  content: "+";
+  background-image: none;
+  font-size: 22px;
+  font-weight: 400;
+  color: #111111;
+  transform: none;
+}
+
+.product-info .accordion-button:not(.collapsed)::after {
+  content: "−";
+}
+
+.product-info .accordion-button {
+  padding: 16px 0;
+  font-weight: 600;
+  color: #111111;
+  background: transparent;
+  box-shadow: none;
+}
+
+.product-info .accordion-item {
+  border: none;
+  border-top: 1px solid #e6e6e6;
+}
+
+.product-info .accordion-item:last-child {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.product-info .accordion-body {
+  padding: 0 0 16px;
+  color: #5a5a5a;
+  font-size: 15px;
+  line-height: 1.7;
+}

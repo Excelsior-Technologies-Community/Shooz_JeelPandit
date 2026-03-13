@@ -116,6 +116,23 @@ function ProductDetailExtra() {
           ))}
         </div>
       </aside>
+
+      <div className="bg_img">
+        <img
+          src="https://qx-shooz.myshopify.com/cdn/shop/files/filler2.png?v=1731652695"
+          alt="Chic fashion collection"
+        />
+        <div className="img_text">
+          <p>Effortless Fashion, Every Day</p>
+          <h1>Chic Styles for the Modern Woman</h1>
+          <p>
+            Embrace effortless elegance with our curated collection of chic
+            styles designed for the modern woman. From desk to dinner, our
+            fashion pieces effortlessly transition with you. Unlock exclusive
+            offers and redefine your daily style with ease.
+          </p>
+        </div>
+      </div>
     </section>
   );
 }

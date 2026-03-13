@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import productsData from "../../../Products.json";
 import { useParams } from "react-router-dom";
 import "./css/productDetail.css";
@@ -17,7 +17,18 @@ function ProductDetail() {
   }, [product]);
 
   const [mainImage, setMainImage] = useState(product ? product.image : "");
-  const [openSection, setOpenSection] = useState("shipping");
+
+  useEffect(() => {
+    if (!product) return;
+    try {
+      const key = "recentlyViewed";
+      const stored = JSON.parse(localStorage.getItem(key) || "[]");
+      const next = [product.id, ...stored.filter((id) => id !== product.id)];
+      localStorage.setItem(key, JSON.stringify(next.slice(0, 4)));
+    } catch {
+      console.error("error");
+    }
+  }, [product]);
 
   if (!product) {
     return <h2>Product not found</h2>;
@@ -96,42 +107,56 @@ function ProductDetail() {
           </div>
         </div>
 
-        <div className="accordion">
-          <button
-            type="button"
-            className="accordion-row"
-            onClick={() =>
-              setOpenSection(openSection === "shipping" ? null : "shipping")
-            }
-          >
-            <span>Shipping information</span>
-            <span className="accordion-icon">
-              {openSection === "shipping" ? "−" : "+"}
-            </span>
-          </button>
-          {openSection === "shipping" && (
-            <div className="accordion-body">
-              Free shipping on orders over $100. Ships in 2-4 business days.
+        <div className="accordion" id="productDetailAccordion">
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="pd-heading-shipping">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#pd-collapse-shipping"
+                aria-expanded="false"
+                aria-controls="pd-collapse-shipping"
+              >
+                Shipping information
+              </button>
+            </h2>
+            <div
+              id="pd-collapse-shipping"
+              className="accordion-collapse collapse"
+              aria-labelledby="pd-heading-shipping"
+              data-bs-parent="#productDetailAccordion"
+            >
+              <div className="accordion-body">
+                Free shipping on orders over $100. Ships in 2-4 business days.
+              </div>
             </div>
-          )}
+          </div>
 
-          <button
-            type="button"
-            className="accordion-row"
-            onClick={() =>
-              setOpenSection(openSection === "care" ? null : "care")
-            }
-          >
-            <span>Care Guide</span>
-            <span className="accordion-icon">
-              {openSection === "care" ? "−" : "+"}
-            </span>
-          </button>
-          {openSection === "care" && (
-            <div className="accordion-body">
-              Wipe clean with a damp cloth. Air dry only.
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="pd-heading-care">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#pd-collapse-care"
+                aria-expanded="false"
+                aria-controls="pd-collapse-care"
+              >
+                Care Guide
+              </button>
+            </h2>
+            <div
+              id="pd-collapse-care"
+              className="accordion-collapse collapse"
+              aria-labelledby="pd-heading-care"
+              data-bs-parent="#productDetailAccordion"
+            >
+              <div className="accordion-body">
+                Wipe clean with a damp cloth. Air dry only.
+              </div>
             </div>
-          )}
+          </div>
         </div>
 
         <div className="trust-list">

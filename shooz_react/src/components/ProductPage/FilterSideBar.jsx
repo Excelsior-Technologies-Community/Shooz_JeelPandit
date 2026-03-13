@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import productsData from "../../../Products.json";
 import { Link, useNavigate } from "react-router-dom";
 import "./css/filterSide.css";
-import { BsCartPlus, BsEye, BsHeart, BsArrowRepeat } from "react-icons/bs";
+import { BsCartPlus, BsEye, BsHeart } from "react-icons/bs";
+import { FaExchangeAlt } from "react-icons/fa";
 
 function FilterSideBar() {
   const navigate = useNavigate();
@@ -471,7 +472,7 @@ function FilterSideBar() {
                         aria-label="Compare product"
                         onClick={stopCardClick}
                       >
-                        <BsArrowRepeat />
+                        <FaExchangeAlt />
                       </button>
                     </div>
                   </div>
