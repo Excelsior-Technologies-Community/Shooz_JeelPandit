@@ -2,6 +2,7 @@
 import Home from "./Pages/Home";
 import FilterSideBarPage from "./Pages/FilterSideBarPage";
 import FilterDrawerPage from "./Pages/FilterDrawerPage";
+import FilterTopBarPage from "./Pages/FilterTopBarPage";
 import ProductDetailPage from "./Pages/ProductDetailPage";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Route path="/FilterSideBarPage" element={<FilterSideBarPage />} />
       <Route path="/FilterDrawerPage" element={<FilterDrawerPage />} />
       <Route path="/product/:id" element={<ProductDetailPage />} />
+      <Route path="/FilterTopBarPage" element={<FilterTopBarPage />} />
     </Routes>
   );
 }

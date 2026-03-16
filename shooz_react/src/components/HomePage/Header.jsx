@@ -83,7 +83,9 @@ const Header = () => {
                           <li>
                             <Link to="/FilterDrawerPage">Filter Drawer</Link>
                           </li>
-                          <li>Filter Top</li>
+                          <li>
+                            <Link to="/FilterTopBarPage">Filter Top</Link>
+                          </li>
                           <li>Without Filter</li>
                           <li>Collection - 2 Columns</li>
                           <li>Collection - 3 Columns</li>
