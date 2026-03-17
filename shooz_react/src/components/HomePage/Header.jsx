@@ -1,12 +1,13 @@
-﻿﻿﻿import { useEffect, useState } from "react";
+﻿﻿import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import "./css/header.css";
 
 const Header = () => {
   const BUY_NOW_URL = "https://qx-shooz.myshopify.com/collections/all";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileSection, setOpenMobileSection] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
@@ -23,6 +24,27 @@ const Header = () => {
   const toggleMobileSection = (section) => {
     setOpenMobileSection((prev) => (prev === section ? null : section));
   };
+
+  const shopPaths = [
+    "/FilterSideBarPage",
+    "/FilterDrawerPage",
+    "/FilterTopBarPage",
+  ];
+  const productPaths = ["/product"];
+  const blogPaths = ["/ListLeftSideBarPage"];
+  const pagesPaths = [
+    "/about-us-1",
+    "/about-us-2",
+    "/about-us-3",
+    "/contact",
+    "/faqs",
+    "/lookbook",
+    "/sizeguide",
+    "/wishlist",
+  ];
+
+  const isPathActive = (paths) =>
+    paths.some((path) => location.pathname.startsWith(path));
 
   return (
     <header>
@@ -60,14 +82,19 @@ const Header = () => {
             {/* Center Menu */}
             <ul className="navbar-nav mx-auto gap-4">
               <li className="nav-item">
-                <a className="nav-link active" href="#">
+                <NavLink className="nav-link" to="/" end>
                   Home
-                </a>
+                </NavLink>
               </li>
 
               {/* SHOP */}
               <li className="nav-item position-static">
-                <a className="nav-link" href="#">
+                <a
+                  className={`nav-link ${
+                    isPathActive(shopPaths) ? "active-main-menu" : ""
+                  }`}
+                  href="#"
+                >
                   Shop <i className="bi bi-chevron-down small"></i>
                 </a>
 
@@ -143,7 +170,12 @@ const Header = () => {
 
               {/* PRODUCT */}
               <li className="nav-item position-static">
-                <a className="nav-link" href="#">
+                <a
+                  className={`nav-link ${
+                    isPathActive(productPaths) ? "active-main-menu" : ""
+                  }`}
+                  href="#"
+                >
                   Product <i className="bi bi-chevron-down small"></i>
                 </a>
 
@@ -208,7 +240,12 @@ const Header = () => {
 
               {/* BLOG */}
               <li className="nav-item position-static">
-                <a className="nav-link" href="#">
+                <a
+                  className={`nav-link ${
+                    isPathActive(blogPaths) ? "active-main-menu" : ""
+                  }`}
+                  href="#"
+                >
                   Blog <i className="bi bi-chevron-down small"></i>
                 </a>
 
@@ -218,6 +255,9 @@ const Header = () => {
                       <div className="col-lg-3">
                         <h6 className="mega-title">List Layout</h6>
                         <ul className="mega-links">
+                          <li>
+                            <Link to="/ListLeftSideBarPage">Left Sidebar</Link>
+                          </li>
                           <li>Left Sidebar</li>
                           <li>Right Sidebar</li>
                           <li>List Item Basic</li>
@@ -271,35 +311,40 @@ const Header = () => {
 
               {/* PAGES */}
               <li className="nav-item position-relative pages-item">
-                <a href="/pages" className="nav-link">
+                <a
+                  href="#"
+                  className={`nav-link ${
+                    isPathActive(pagesPaths) ? "active-main-menu" : ""
+                  }`}
+                >
                   Pages <i className="bi bi-chevron-down small"></i>
                 </a>
 
                 <div className="pages-dropdown">
                   <ul className="pages-menu-list">
                     <li>
-                      <a href="/about-us-1">About Us 1</a>
+                      <Link to="/about-us-1">About Us 1</Link>
                     </li>
                     <li>
-                      <a href="/about-us-2">About Us 2</a>
+                      <Link to="/about-us-2">About Us 2</Link>
                     </li>
                     <li>
-                      <a href="/about-us-3">About Us 3</a>
+                      <Link to="/about-us-3">About Us 3</Link>
                     </li>
                     <li>
-                      <a href="/contact">Contact</a>
+                      <Link to="/contact">Contact</Link>
                     </li>
                     <li>
-                      <a href="/faqs">Faqs</a>
+                      <Link to="/faqs">Faqs</Link>
                     </li>
                     <li>
-                      <a href="/lookbook">Lookbook</a>
+                      <Link to="/lookbook">Lookbook</Link>
                     </li>
                     <li>
-                      <a href="/sizeguide">Size Guide</a>
+                      <Link to="/sizeguide">Size Guide</Link>
                     </li>
                     <li>
-                      <a href="/wishlist">Wishlist</a>
+                      <Link to="/wishlist">Wishlist</Link>
                     </li>
                   </ul>
                 </div>
@@ -307,7 +352,7 @@ const Header = () => {
 
               {/* BUY NOW */}
               <li className="nav-item position-relative">
-                <a className="nav-link fw-semibold" href={"#"}>
+                <a className="nav-link fw-semibold" href={BUY_NOW_URL}>
                   Buy Now
                 </a>
                 <span className="badge bg-success sale-badge">Sale</span>
@@ -373,15 +418,17 @@ const Header = () => {
 
         <ul className="mobile-menu-list">
           <li>
-            <a href="#" onClick={closeMobileMenu}>
+            <NavLink to="/" onClick={closeMobileMenu} end>
               Home
-            </a>
+            </NavLink>
           </li>
 
           <li>
             <button
               type="button"
-              className="mobile-accordion-trigger"
+              className={`mobile-accordion-trigger ${
+                isPathActive(shopPaths) ? "active-main-menu" : ""
+              }`}
               onClick={() => toggleMobileSection("shop")}
               aria-expanded={openMobileSection === "shop"}
             >
@@ -409,7 +456,9 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className="mobile-accordion-trigger"
+              className={`mobile-accordion-trigger ${
+                isPathActive(pagesPaths) ? "active-main-menu" : ""
+              }`}
               onClick={() => toggleMobileSection("product")}
               aria-expanded={openMobileSection === "product"}
             >
@@ -437,7 +486,9 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className="mobile-accordion-trigger"
+              className={`mobile-accordion-trigger ${
+                isPathActive(blogPaths) ? "active-main-menu" : ""
+              }`}
               onClick={() => toggleMobileSection("blog")}
               aria-expanded={openMobileSection === "blog"}
             >
@@ -463,7 +514,9 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className="mobile-accordion-trigger"
+              className={`mobile-accordion-trigger ${
+                isPathActive(pagesPaths) ? "active-main-menu" : ""
+              }`}
               onClick={() => toggleMobileSection("pages")}
               aria-expanded={openMobileSection === "pages"}
             >
@@ -480,44 +533,44 @@ const Header = () => {
               className={`mobile-submenu ${openMobileSection === "pages" ? "open" : ""}`}
             >
               <li>
-                <a href="/about-us-1" onClick={closeMobileMenu}>
+                <Link to="/about-us-1" onClick={closeMobileMenu}>
                   About Us 1
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about-us-2" onClick={closeMobileMenu}>
+                <Link to="/about-us-2" onClick={closeMobileMenu}>
                   About Us 2
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about-us-3" onClick={closeMobileMenu}>
+                <Link to="/about-us-3" onClick={closeMobileMenu}>
                   About Us 3
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" onClick={closeMobileMenu}>
+                <Link to="/contact" onClick={closeMobileMenu}>
                   Contact
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/faqs" onClick={closeMobileMenu}>
+                <Link to="/faqs" onClick={closeMobileMenu}>
                   Faqs
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/lookbook" onClick={closeMobileMenu}>
+                <Link to="/lookbook" onClick={closeMobileMenu}>
                   Lookbook
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/sizeguide" onClick={closeMobileMenu}>
+                <Link to="/sizeguide" onClick={closeMobileMenu}>
                   Size Guide
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/wishlist" onClick={closeMobileMenu}>
+                <Link to="/wishlist" onClick={closeMobileMenu}>
                   Wishlist
-                </a>
+                </Link>
               </li>
             </ul>
           </li>

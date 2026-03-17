@@ -4,6 +4,7 @@ import FilterSideBarPage from "./Pages/FilterSideBarPage";
 import FilterDrawerPage from "./Pages/FilterDrawerPage";
 import FilterTopBarPage from "./Pages/FilterTopBarPage";
 import ProductDetailPage from "./Pages/ProductDetailPage";
+import ListLeftSideBarPage from "./Pages/ListLeftSideBarPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/FilterDrawerPage" element={<FilterDrawerPage />} />
       <Route path="/product/:id" element={<ProductDetailPage />} />
       <Route path="/FilterTopBarPage" element={<FilterTopBarPage />} />
+      <Route path="/ListLeftSideBarPage" element={<ListLeftSideBarPage />} />
     </Routes>
   );
 }

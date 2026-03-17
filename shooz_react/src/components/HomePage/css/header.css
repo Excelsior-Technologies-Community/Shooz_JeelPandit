@@ -9,13 +9,26 @@
 
 .nav-link {
   font-weight: 500;
-  color: #000 !important;
+  color: #000;
 }
 
 .nav-link.active {
   color: #e63946 !important;
-
   border-bottom: 2px solid #e63946;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.active-main-menu {
+  color: #e63946 !important;
+  border-bottom: 2px solid #e63946;
+
+  padding: 7px 10px !important;
+}
+
+/* Active style for mobile menu */
+.mobile-menu-list .active,
+.mobile-menu-list .active-main-menu {
+  color: #e63946 !important;
 }
 
 .nav-icons i {
@@ -166,7 +179,7 @@
 .mobile-menu-trigger,
 .mobile-close-btn {
   border: 0;
-  background: transparent;
+  background: white;
   padding: 0;
   color: #111;
 }
@@ -179,7 +192,6 @@
 .mobile-offcanvas-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
@@ -243,6 +255,10 @@
   background: transparent;
 }
 
+.mobile-accordion-trigger:hover {
+  background-color: #fff;
+}
+
 .mobile-accordion-trigger i {
   font-size: 12px;
 }
@@ -254,6 +270,7 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.22s ease;
+  background-color: #fff;
 }
 
 .mobile-submenu.open {
