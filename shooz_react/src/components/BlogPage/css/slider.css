@@ -1,26 +1,6 @@
 .slide {
   display: flex;
-  height: 530px;
-}
-
-.content {
-  width: 50%;
-  padding: 80px;
-  background: #f8f8f8;
-}
-
-.image {
-  width: 50%;
-}
-
-.image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.slide {
-  display: flex;
-  height: 400px;
+  height: 500px;
 }
 
 .content {
@@ -49,7 +29,7 @@
 }
 
 .desc {
-  margin: 15px 0;
+  /* margin: 15px 0; */
   color: #555;
 }
 
@@ -77,6 +57,7 @@ button:hover {
 
 .slider-wrapper {
   position: relative;
+  margin-top: 0;
 }
 
 .custom-prev {

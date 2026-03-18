@@ -1,11 +1,9 @@
-/* MAIN CONTAINER */
 .blog-container {
   display: flex;
   gap: 40px;
-  padding: 40px;
+  padding: 60px;
 }
 
-/* SIDEBAR */
 .sidebar {
   width: 28%;
 }
@@ -27,7 +25,6 @@
   line-height: 1.6;
 }
 
-/* RECENT POSTS */
 .recent-title {
   margin-bottom: 10px;
 }
@@ -55,26 +52,24 @@
   font-weight: 500;
 }
 
-/* RIGHT SIDE BLOG LIST */
-.blog-list-container {
+.blog-list {
   width: 72%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-rows: repeat(3, auto); /* 3 rows */
 }
 
-/* BLOG CARD (FIXED SIDE-BY-SIDE) */
 .blog-card {
   display: flex;
-  flex-direction: row; /* FORCE LEFT-RIGHT */
-  gap: 30px;
-  margin-bottom: 50px;
-  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 0;
 }
 
-/* IMAGE */
 .img-box {
-  flex: 1;
-  height: 300px;
+  width: 95%;
+  height: 280px;
   overflow: hidden;
-  border-radius: 8px;
 }
 
 .img-box img {
@@ -86,40 +81,40 @@
 
 .img-box img:hover {
   transform: scale(1.05);
+  cursor: pointer;
 }
 
-/* CONTENT */
 .blog-content {
-  flex: 1;
+  width: 95%;
 }
 
 .date {
-  font-size: 13px;
+  font-size: 12px;
   color: gray;
-  letter-spacing: 1px;
 }
 
 .blog-content h2 {
-  margin: 12px 0;
-  font-size: 28px;
-  font-weight: 600;
+  margin: 10px 0;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.blog-content h2:hover {
+  color: #ae3f4f;
 }
 
 .blog-content p {
-  font-size: 15px;
+  font-size: 14px;
   color: #555;
-  line-height: 1.6;
 }
 
-/* BUTTON */
 .blog-content button {
-  margin-top: 20px;
-  padding: 12px 22px;
-  background: #b23a48;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  padding: 10px 18px;
+  background: #ae3f4f;
   color: white;
   border: none;
-  font-weight: 500;
-  letter-spacing: 1px;
   cursor: pointer;
 }
 
@@ -127,7 +122,6 @@
   background: black;
 }
 
-/* TAGS */
 .tags-title {
   margin-top: 30px;
 }
@@ -140,9 +134,9 @@
   cursor: pointer;
 }
 
-/* PROMO IMAGE */
 .promo {
   margin-top: 30px;
+  position: relative;
 }
 
 .promo img {
@@ -151,14 +145,13 @@
   object-fit: cover;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .blog-container {
     flex-direction: column-reverse;
   }
 
   .sidebar,
-  .blog-list-container {
+  .blog-list {
     width: 100%;
   }
 

@@ -31,7 +31,12 @@ const Header = () => {
     "/FilterTopBarPage",
   ];
   const productPaths = ["/product"];
-  const blogPaths = ["/ListLeftSideBarPage"];
+  const blogPaths = [
+    "/ListLeftSideBarPage",
+    "/ListItemOverlayPage",
+    "/GridRightSideBarPage",
+    "/GridItemBoxPage",
+  ];
   const pagesPaths = [
     "/about-us-1",
     "/about-us-2",
@@ -105,13 +110,17 @@ const Header = () => {
                         <h6 className="mega-title">Layout</h6>
                         <ul className="mega-links">
                           <li>
-                            <Link to="/FilterSideBarPage">Filter Sidebar</Link>
+                            <NavLink to="/FilterSideBarPage">
+                              Filter Sidebar
+                            </NavLink>
                           </li>
                           <li>
-                            <Link to="/FilterDrawerPage">Filter Drawer</Link>
+                            <NavLink to="/FilterDrawerPage">
+                              Filter Drawer
+                            </NavLink>
                           </li>
                           <li>
-                            <Link to="/FilterTopBarPage">Filter Top</Link>
+                            <NavLink to="/FilterTopBarPage">Filter Top</NavLink>
                           </li>
                           <li>Without Filter</li>
                           <li>Collection - 2 Columns</li>
@@ -256,12 +265,18 @@ const Header = () => {
                         <h6 className="mega-title">List Layout</h6>
                         <ul className="mega-links">
                           <li>
-                            <Link to="/ListLeftSideBarPage">Left Sidebar</Link>
+                            <NavLink to="/ListLeftSideBarPage">
+                              List Left Sidebar
+                            </NavLink>
                           </li>
                           <li>Left Sidebar</li>
                           <li>Right Sidebar</li>
                           <li>List Item Basic</li>
-                          <li>List Item Overlay</li>
+                          <li>
+                            <NavLink to="/ListItemOverlayPage">
+                              List Item Overlay
+                            </NavLink>
+                          </li>
                           <li>List Item Classic</li>
                         </ul>
                       </div>
@@ -270,8 +285,16 @@ const Header = () => {
                         <h6 className="mega-title">Grid Layout</h6>
                         <ul className="mega-links">
                           <li>Grid Left Sidebar</li>
-                          <li>Grid Right Sidebar</li>
-                          <li>Grid Item Basic</li>
+                          <li>
+                            <NavLink to="/GridRightSideBarPage">
+                              Grid Right Sidebar
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink to="/GridItemBoxPage">
+                              Grid Item Box
+                            </NavLink>
+                          </li>
                           <li>Grid Item Overlay</li>
                           <li>Grid Item Classic</li>
                         </ul>
@@ -323,28 +346,28 @@ const Header = () => {
                 <div className="pages-dropdown">
                   <ul className="pages-menu-list">
                     <li>
-                      <Link to="/about-us-1">About Us 1</Link>
+                      <NavLink to="/about-us-1">About Us 1</NavLink>
                     </li>
                     <li>
-                      <Link to="/about-us-2">About Us 2</Link>
+                      <NavLink to="/about-us-2">About Us 2</NavLink>
                     </li>
                     <li>
-                      <Link to="/about-us-3">About Us 3</Link>
+                      <NavLink to="/about-us-3">About Us 3</NavLink>
                     </li>
                     <li>
-                      <Link to="/contact">Contact</Link>
+                      <NavLink to="/contact">Contact</NavLink>
                     </li>
                     <li>
-                      <Link to="/faqs">Faqs</Link>
+                      <NavLink to="/faqs">Faqs</NavLink>
                     </li>
                     <li>
-                      <Link to="/lookbook">Lookbook</Link>
+                      <NavLink to="/lookbook">Lookbook</NavLink>
                     </li>
                     <li>
-                      <Link to="/sizeguide">Size Guide</Link>
+                      <NavLink to="/sizeguide">Size Guide</NavLink>
                     </li>
                     <li>
-                      <Link to="/wishlist">Wishlist</Link>
+                      <NavLink to="/wishlist">Wishlist</NavLink>
                     </li>
                   </ul>
                 </div>

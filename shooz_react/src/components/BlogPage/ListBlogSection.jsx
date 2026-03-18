@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/ListblogSection.css";
+import "./css/listblogSection.css";
 
 const posts = [
   {
@@ -79,7 +79,7 @@ function ListBlogSection() {
       </div>
 
       {/* RIGHT BLOG LIST */}
-      <div className="blog-list">
+      <div className="blog-list-container ">
         {posts.map((item, i) => (
           <div className="blog-card" key={i}>
             <div className="img-box">

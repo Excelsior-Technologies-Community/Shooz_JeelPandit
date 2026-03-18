@@ -14,21 +14,38 @@
 
 .nav-link.active {
   color: #e63946 !important;
-  border-bottom: 2px solid #e63946;
+  border-bottom: none !important;
 }
 
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link.active-main-menu {
   color: #e63946 !important;
-  border-bottom: 2px solid #e63946;
+  border-bottom: none !important;
 
   padding: 7px 10px !important;
 }
 
-/* Active style for mobile menu */
+.navbar-nav .nav-item:has(.active) > .nav-link {
+  color: #e63946 !important;
+  border-bottom: 2px solid #e63946 !important;
+  padding: 7px 10px !important;
+}
+
 .mobile-menu-list .active,
 .mobile-menu-list .active-main-menu {
   color: #e63946 !important;
+}
+
+.mega-links .active,
+.pages-menu-list .active {
+  color: #e63946 !important;
+  text-decoration: none !important;
+}
+
+.mega-links a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .nav-icons i {
@@ -88,7 +105,7 @@
 }
 
 .mega-links li:hover {
-  color: #000;
+  color: #e63946;
 }
 
 .mega-img-card img {
