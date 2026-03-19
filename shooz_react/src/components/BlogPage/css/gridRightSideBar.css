@@ -1,114 +1,114 @@
-.blog-container {
+.grid-blog-page .blog-container {
   display: flex;
   gap: 40px;
   padding: 60px;
 }
 
-.sidebar {
+.grid-blog-page .sidebar {
   width: 28%;
 }
 
-.sidebar h4 {
+.grid-blog-page .sidebar h4 {
   margin-bottom: 15px;
 }
 
-.author-img {
+.grid-blog-page .author-img {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
 
-.author-text {
+.grid-blog-page .author-text {
   font-size: 14px;
   color: #555;
   margin: 15px 0 30px;
   line-height: 1.6;
 }
 
-.recent-title {
+.grid-blog-page .recent-title {
   margin-bottom: 10px;
 }
 
-.recent-item {
+.grid-blog-page .recent-item {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
   align-items: center;
 }
 
-.recent-item img {
+.grid-blog-page .recent-item img {
   width: 70px;
   height: 70px;
   object-fit: cover;
 }
 
-.small-date {
+.grid-blog-page .small-date {
   font-size: 11px;
   color: gray;
 }
 
-.small-title {
+.grid-blog-page .small-title {
   font-size: 14px;
   font-weight: 500;
 }
 
-.blog-list {
+.grid-blog-page .blog-list {
   width: 72%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, auto); /* 3 rows */
 }
 
-.blog-card {
+.grid-blog-page .blog-card {
   display: flex;
   flex-direction: column;
   gap: 15px;
   margin-bottom: 0;
 }
 
-.img-box {
+.grid-blog-page .img-box {
   width: 95%;
   height: 280px;
   overflow: hidden;
 }
 
-.img-box img {
+.grid-blog-page .img-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
-.img-box img:hover {
+.grid-blog-page .img-box img:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
 
-.blog-content {
+.grid-blog-page .blog-content {
   width: 95%;
 }
 
-.date {
+.grid-blog-page .date {
   font-size: 12px;
   color: gray;
 }
 
-.blog-content h2 {
+.grid-blog-page .blog-content h2 {
   margin: 10px 0;
   font-size: 22px;
   cursor: pointer;
 }
 
-.blog-content h2:hover {
+.grid-blog-page .blog-content h2:hover {
   color: #ae3f4f;
 }
 
-.blog-content p {
+.grid-blog-page .blog-content p {
   font-size: 14px;
   color: #555;
 }
 
-.blog-content button {
+.grid-blog-page .blog-content button {
   margin-top: 5px;
   margin-bottom: 20px;
   padding: 10px 18px;
@@ -118,15 +118,15 @@
   cursor: pointer;
 }
 
-.blog-content button:hover {
+.grid-blog-page .blog-content button:hover {
   background: black;
 }
 
-.tags-title {
+.grid-blog-page .tags-title {
   margin-top: 30px;
 }
 
-.tags span {
+.grid-blog-page .tags span {
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid #ddd;
@@ -134,47 +134,95 @@
   cursor: pointer;
 }
 
-.promo {
+.grid-blog-page .promo {
   margin-top: 30px;
   position: relative;
 }
 
-.promo img {
+.grid-blog-page .promo img {
   width: 100%;
   height: 500px;
   object-fit: cover;
 }
 
 @media (max-width: 768px) {
-  .blog-container {
+  .grid-blog-page .blog-container {
     flex-direction: column-reverse;
   }
 
-  .sidebar,
-  .blog-list {
+  .grid-blog-page .sidebar,
+  .grid-blog-page .blog-list {
     width: 100%;
   }
 
-  .blog-card {
+  .grid-blog-page .blog-card {
     flex-direction: column;
   }
 
-  .img-box {
+  .grid-blog-page .img-box {
     width: 100%;
     height: 220px;
   }
 
-  .blog-content {
+  .grid-blog-page .blog-content {
     width: 100%;
   }
 
-  .recent-item {
+  .grid-blog-page .recent-item {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .recent-item img {
+  .grid-blog-page .recent-item img {
     width: 100%;
     height: 150px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid-blog-page .blog-container {
+    padding: 32px 24px;
+    gap: 30px;
+  }
+
+  .grid-blog-page .blog-list {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .grid-blog-page .blog-content h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .grid-blog-page .blog-container {
+    padding: 20px 12px;
+    gap: 16px;
+  }
+
+  .grid-blog-page .sidebar {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .grid-blog-page .sidebar h4 {
+    font-size: 16px;
+  }
+
+  .grid-blog-page .recent-item {
+    gap: 8px;
+  }
+
+  .grid-blog-page .img-box {
+    height: 180px;
+  }
+
+  .grid-blog-page .blog-content h2 {
+    font-size: 18px;
+  }
+
+  .grid-blog-page .blog-content p {
+    font-size: 13px;
   }
 }

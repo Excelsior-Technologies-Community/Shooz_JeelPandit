@@ -38,7 +38,7 @@ const Header = () => {
     "/GridItemBoxPage",
   ];
   const pagesPaths = [
-    "/about-us-1",
+    "/AboutUs1Page",
     "/about-us-2",
     "/about-us-3",
     "/contact",
@@ -346,7 +346,7 @@ const Header = () => {
                 <div className="pages-dropdown">
                   <ul className="pages-menu-list">
                     <li>
-                      <NavLink to="/about-us-1">About Us 1</NavLink>
+                      <NavLink to="/AboutUs1Page">About Us 1</NavLink>
                     </li>
                     <li>
                       <NavLink to="/about-us-2">About Us 2</NavLink>

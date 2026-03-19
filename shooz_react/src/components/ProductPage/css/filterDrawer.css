@@ -377,7 +377,7 @@
 
 /* ================= DRAWER ================= */
 
-.offcanvas-drawer {
+.filter-drawer-page .offcanvas-drawer {
   position: fixed;
   top: 0;
   right: -420px;
@@ -390,13 +390,13 @@
   flex-direction: column;
 }
 
-.offcanvas-drawer.open {
+.filter-drawer-page .offcanvas-drawer.open {
   right: 0;
 }
 
 /* ================= OVERLAY ================= */
 
-.offcanvas-overlay {
+.filter-drawer-page .offcanvas-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
@@ -405,25 +405,25 @@
 
 /* ================= DRAWER HEADER ================= */
 
-.offcanvas-header {
+.filter-drawer-page .offcanvas-header {
   text-align: center;
   padding: 20px;
   border-bottom: 1px solid #eee;
   position: relative;
 }
 
-.offcanvas-header h3 {
+.filter-drawer-page .offcanvas-header h3 {
   font-size: 18px;
   margin: 0;
 }
 
-.offcanvas-header p {
+.filter-drawer-page .offcanvas-header p {
   font-size: 13px;
   color: #888;
   margin-top: 5px;
 }
 
-.offcanvas-close {
+.filter-drawer-page .offcanvas-close {
   position: absolute;
   right: 20px;
   top: 20px;
@@ -434,13 +434,13 @@
 
 /* ================= BODY ================= */
 
-.offcanvas-body {
+.filter-drawer-page .offcanvas-body {
   flex: 1;
   overflow-y: auto;
   padding: 20px;
 }
 
-.offcanvas-body h4 {
+.filter-drawer-page .offcanvas-body h4 {
   font-size: 16px;
   margin: 20px 0 10px;
 }
@@ -454,7 +454,7 @@
 
 /* ================= FOOTER ================= */
 
-.offcanvas-footer {
+.filter-drawer-page .offcanvas-footer {
   display: flex;
   justify-content: space-between;
   padding: 20px;
@@ -523,7 +523,7 @@
     display: none;
   }
 
-  .offcanvas-drawer {
+  .filter-drawer-page .offcanvas-drawer {
     width: 100%;
   }
 
@@ -531,11 +531,11 @@
 
 /* ================= MOBILE FILTER SECTIONS ================= */
 
-.mobile-filter-sections {
+.filter-drawer-page .mobile-filter-sections {
   flex: 1;
 }
 
-.mobile-filter-section {
+.filter-drawer-page .mobile-filter-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -545,19 +545,19 @@
   cursor: pointer;
 }
 
-.mobile-filter-section .arrow {
+.filter-drawer-page .mobile-filter-section .arrow {
   font-size: 14px;
   color: #999;
 }
 
 /* ================= MOBILE FILTER DETAIL ================= */
-.mobile-filter-detail {
+.filter-drawer-page .mobile-filter-detail {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.back-btn {
+.filter-drawer-page .back-btn {
   background: none;
   border: none;
   font-size: 14px;
@@ -572,12 +572,12 @@
   transform: translateY(-50%);
 }
 
-.mobile-filter-options {
+.filter-drawer-page .mobile-filter-options {
   flex: 1;
   overflow-y: auto;
 }
 
-.filter-label-mobile {
+.filter-drawer-page .filter-label-mobile {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -587,13 +587,13 @@
   cursor: pointer;
 }
 
-.filter-label-mobile input[type="checkbox"] {
+.filter-drawer-page .filter-label-mobile input[type="checkbox"] {
   width: 18px;
   height: 18px;
   cursor: pointer;
 }
 
-.color-dot-mobile {
+.filter-drawer-page .color-dot-mobile {
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -601,7 +601,7 @@
   border: 1px solid #eee;
 }
 
-.price-slider-mobile {
+.filter-drawer-page .price-slider-mobile {
   width: 100%;
   margin: 20px 0;
   -webkit-appearance: none;
@@ -609,7 +609,7 @@
   background: #ddd;
 }
 
-.price-slider-mobile::-webkit-slider-thumb {
+.filter-drawer-page .price-slider-mobile::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
@@ -618,10 +618,12 @@
   cursor: pointer;
 }
 
-.price-range-mobile {
+.filter-drawer-page .price-range-mobile {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
   color: #666;
   margin-bottom: 20px;
 }
+
+

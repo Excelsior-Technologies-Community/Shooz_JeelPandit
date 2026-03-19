@@ -42,7 +42,7 @@ const GridRightSideBar = () => {
   ];
 
   return (
-    <>
+    <div className="grid-blog-page">
       <div className="blog-container">
         {/* LEFT SIDEBAR */}
 
@@ -104,7 +104,7 @@ const GridRightSideBar = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

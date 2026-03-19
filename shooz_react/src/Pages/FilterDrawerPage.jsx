@@ -9,9 +9,11 @@ const FilterDrawerPage = () => {
   return (
     <>
       <Header />
-      <Breadcrumb title={"Filter Drawer Page"} />
-      {/* <ProductsNav /> */}
-      <FilterDrawer />
+      <div className="filter-drawer-page">
+        <Breadcrumb title={"Filter Drawer Page"} />
+        {/* <ProductsNav /> */}
+        <FilterDrawer />
+      </div>
       <FooterSimple />
     </>
   );

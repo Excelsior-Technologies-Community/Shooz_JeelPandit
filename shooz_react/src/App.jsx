@@ -8,6 +8,7 @@ import ListLeftSideBarPage from "./Pages/ListLeftSideBarPage";
 import GridRightSideBarPage from "./Pages/GridRightSideBarPage";
 import ListItemOverlayPage from "./Pages/ListItemOverlayPage";
 import GridItemBoxPage from "./Pages/GridItemBoxPage";
+import AboutUs1Page from "./Pages/AboutUs1Page";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/GridRightSideBarPage" element={<GridRightSideBarPage />} />
       <Route path="/ListItemOverlayPage" element={<ListItemOverlayPage />} />
       <Route path="/GridItemBoxPage" element={<GridItemBoxPage />} />
+      <Route path="/AboutUs1Page" element={<AboutUs1Page />} />
     </Routes>
   );
 }

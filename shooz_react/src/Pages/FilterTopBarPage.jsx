@@ -8,8 +8,10 @@ const FilterTopBarPage = () => {
   return (
     <>
       <Header />
-      <Breadcrumb title={"Filter TopBar Page"} />
-      <FilterTopBar />
+      <div className="filter-topbar-page">
+        <Breadcrumb title={"Filter TopBar Page"} />
+        <FilterTopBar />
+      </div>
       <FooterSimple />
     </>
   );
