@@ -39,7 +39,7 @@ const Header = () => {
   ];
   const pagesPaths = [
     "/AboutUs1Page",
-    "/about-us-2",
+    "/AboutUs2Page",
     "/about-us-3",
     "/contact",
     "/faqs",
@@ -349,7 +349,7 @@ const Header = () => {
                       <NavLink to="/AboutUs1Page">About Us 1</NavLink>
                     </li>
                     <li>
-                      <NavLink to="/about-us-2">About Us 2</NavLink>
+                      <NavLink to="/AboutUs2Page">About Us 2</NavLink>
                     </li>
                     <li>
                       <NavLink to="/about-us-3">About Us 3</NavLink>

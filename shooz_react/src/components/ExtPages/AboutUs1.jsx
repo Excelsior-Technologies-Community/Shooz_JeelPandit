@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 import "./css/aboutUs1.css";
+
 import { FiGift, FiHeadphones, FiRefreshCw, FiTruck } from "react-icons/fi";
 
 const AboutUs1 = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-
   const openVideo = () => setIsVideoOpen(true);
   const closeVideo = () => setIsVideoOpen(false);
 
   return (
-    <>
+    <div className="aboutus1-wrapper">
       <div className="fashion-container">
         <div className="left-side">
           <p>FALL INTO FASHION</p>
@@ -146,67 +150,106 @@ const AboutUs1 = () => {
 
       {/* =========================== */}
       <div className="testimonial_section">
-        <div className="testimonial_card">
-          <div className="user_info">
-            <img
-              src="http://qx-shooz.myshopify.com/cdn/shop/files/testi1.jpg?v=1731662817&width=300"
-              alt="user"
-            />
-            <div>
-              <h4>Emily Johnson</h4>
-              <p>Fashion Enthusiast</p>
-              <div className="stars">★★★★★</div>
-            </div>
-          </div>
+        <div className="testimonial-slider-wrapper">
+          <button
+            className="swiper-nav prev swiper-button-prev"
+            aria-label="Previous testimonial"
+          >
+            ←
+          </button>
+          <Swiper
+            modules={[Navigation]}
+            loop={true}
+            spaceBetween={20}
+            slidesPerView={1}
+            navigation={{
+              prevEl: ".swiper-button-prev",
+              nextEl: ".swiper-button-next",
+            }}
+            breakpoints={{
+              640: { slidesPerView: 1 },
+              900: { slidesPerView: 2 },
+              1200: { slidesPerView: 3 },
+            }}
+          >
+            {/* ===== CARD 1 ===== */}
+            <SwiperSlide>
+              <div className="testimonial_card">
+                <div className="user_info">
+                  <img
+                    src="http://qx-shooz.myshopify.com/cdn/shop/files/testi1.jpg?v=1731662817&width=300"
+                    alt="user"
+                  />
+                  <div>
+                    <h4>Emily Johnson</h4>
+                    <p>Fashion Enthusiast</p>
+                    <div className="stars">★★★★★</div>
+                  </div>
+                </div>
 
-          <h3>Perfect !</h3>
-          <p className="review">
-            "I've shopped at many online fashion stores, but Gluck is truly
-            exceptional. Their quality and style are unmatched. I keep coming
-            back for more!"
-          </p>
-        </div>
+                <h3>Perfect !</h3>
+                <p className="review">
+                  "I've shopped at many online fashion stores, but Gluck is
+                  truly exceptional. Their quality and style are unmatched. I
+                  keep coming back for more!"
+                </p>
+              </div>
+            </SwiperSlide>
 
-        <div className="testimonial_card">
-          <div className="user_info">
-            <img
-              src="https://qx-shooz.myshopify.com/cdn/shop/files/testi2.jpg?v=1731662817&width=300"
-              alt="user"
-            />
-            <div>
-              <h4>David Smith</h4>
-              <p>Trendsetter</p>
-              <div className="stars">★★★★★</div>
-            </div>
-          </div>
+            {/* ===== CARD 2 ===== */}
+            <SwiperSlide>
+              <div className="testimonial_card">
+                <div className="user_info">
+                  <img
+                    src="https://qx-shooz.myshopify.com/cdn/shop/files/testi2.jpg?v=1731662817&width=300"
+                    alt="user"
+                  />
+                  <div>
+                    <h4>David Smith</h4>
+                    <p>Trendsetter</p>
+                    <div className="stars">★★★★★</div>
+                  </div>
+                </div>
 
-          <h3>Awesome !</h3>
-          <p className="review">
-            "Gluck is my go-to for the latest fashion trends. Their collection
-            is always up-to-date, and the shopping experience is a breeze. I
-            recommend them to all my friends."
-          </p>
-        </div>
+                <h3>Awesome !</h3>
+                <p className="review">
+                  "Gluck is my go-to for the latest fashion trends. Their
+                  collection is always up-to-date, and the shopping experience
+                  is a breeze. I recommend them to all my friends."
+                </p>
+              </div>
+            </SwiperSlide>
 
-        <div className="testimonial_card">
-          <div className="user_info">
-            <img
-              src="https://qx-shooz.myshopify.com/cdn/shop/files/testi3.jpg?v=1731662817&width=300"
-              alt="user"
-            />
-            <div>
-              <h4>Sarah Anderson</h4>
-              <p>Fashion Blogger</p>
-              <div className="stars">★★★★★</div>
-            </div>
-          </div>
+            {/* ===== CARD 3 ===== */}
+            <SwiperSlide>
+              <div className="testimonial_card">
+                <div className="user_info">
+                  <img
+                    src="https://qx-shooz.myshopify.com/cdn/shop/files/testi3.jpg?v=1731662817&width=300"
+                    alt="user"
+                  />
+                  <div>
+                    <h4>Sarah Anderson</h4>
+                    <p>Fashion Blogger</p>
+                    <div className="stars">★★★★★</div>
+                  </div>
+                </div>
 
-          <h3>Amazing !</h3>
-          <p className="review">
-            "I've had the pleasure of collaborating with Gluck multiple times.
-            Their commitment to style and quality is evident in every piece they
-            offer."
-          </p>
+                <h3>Amazing !</h3>
+                <p className="review">
+                  "I've had the pleasure of collaborating with Gluck multiple
+                  times. Their commitment to style and quality is evident in
+                  every piece they offer."
+                </p>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+          <button
+            className="swiper-nav next swiper-button-next"
+            aria-label="Next testimonial"
+          >
+            →
+          </button>
         </div>
       </div>
 
@@ -262,7 +305,7 @@ const AboutUs1 = () => {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
