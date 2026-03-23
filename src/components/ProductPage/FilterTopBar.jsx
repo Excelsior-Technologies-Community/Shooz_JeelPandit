@@ -13,6 +13,7 @@ import {
   BsChevronRight,
 } from "react-icons/bs";
 import { FaExchangeAlt } from "react-icons/fa";
+import { useCart } from "../../Context/useCart";
 
 function FilterTopBar() {
   const navigate = useNavigate();
@@ -34,6 +35,18 @@ function FilterTopBar() {
   const [isPriceOpen, setIsPriceOpen] = useState(false);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const [mobileFilterView, setMobileFilterView] = useState(null);
+
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (product) => {
+    addToCart({
+      id: product.id,
+      image: product.image,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+    });
+  };
 
   const categories = useMemo(
     () => [...new Set(productsData.map((p) => p.category))],
@@ -302,9 +315,8 @@ function FilterTopBar() {
                 <div className="color-swatch-panel">
                   <div className="color-option-list">
                     <button
-                      className={`color-option ${
-                        filters.color === "all" ? "active" : ""
-                      }`}
+                      className={`color-option ${filters.color === "all" ? "active" : ""
+                        }`}
                       onClick={() => {
                         handleFilterChange("color", "all");
                         setIsColorOpen(false);
@@ -316,9 +328,8 @@ function FilterTopBar() {
                     {colors.map((color) => (
                       <button
                         key={color}
-                        className={`color-option ${
-                          filters.color === color ? "active" : ""
-                        }`}
+                        className={`color-option ${filters.color === color ? "active" : ""
+                          }`}
                         onClick={() => {
                           handleFilterChange("color", color);
                           setIsColorOpen(false);
@@ -511,7 +522,14 @@ function FilterTopBar() {
                     className="product-card-hover-image"
                   />
                   <div className="product-card-footer-actions">
-                    <button className="add-to-cart-btn" onClick={stopCardClick}>
+                    <button
+                      type="button"
+                      className="add-to-cart-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddToCart(product);
+                      }}
+                    >
                       <BsCartPlus />
                       <span>ADD TO CART</span>
                     </button>

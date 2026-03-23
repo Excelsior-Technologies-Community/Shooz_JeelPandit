@@ -1,15 +1,90 @@
 import React, { useEffect, useMemo, useState } from "react";
 import productsData from "../../../Products.json";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import "./css/productDetail.css";
 import { BsBoxSeam, BsFacebook, BsTwitter, BsPinterest } from "react-icons/bs";
+import { useCart } from "../../Context/useCart";
 
 function ProductDetail() {
   const { id } = useParams();
-
+  const location = useLocation();
   const product = productsData.find((p) => p.id === Number(id));
+  const { cart, addToCart } = useCart();
 
   const [qty, setQty] = useState(1);
+
+  // Check if product is in cart
+  const isProductInCart = cart.some(item => item.id === Number(id));
+
+  // Get cart quantity if product exists in cart
+  const cartItem = cart.find(item => item.id === Number(id));
+  const cartQuantity = cartItem ? cartItem.qty : 0;
+
+  // Function to update quantity based on cart status
+  const updateQuantityFromCart = () => {
+    if (isProductInCart && cartQuantity > 0) {
+      // Product is in cart, use cart quantity
+      console.log("Product in cart, setting quantity to:", cartQuantity);
+      setQty(cartQuantity);
+      // Also update localStorage
+      localStorage.setItem(`product_qty_${id}`, cartQuantity);
+    } else {
+      // Product not in cart, reset to 1 and clear localStorage
+      console.log("Product not in cart, resetting quantity to 1");
+      setQty(1);
+      localStorage.removeItem(`product_qty_${id}`);
+    }
+  };
+
+  // Initial load and when cart changes
+  useEffect(() => {
+    // First check if there's a selected quantity from navigation
+    const navQuantity = location.state?.selectedQuantity;
+
+    if (navQuantity) {
+      console.log("Using navigation quantity:", navQuantity);
+      setQty(navQuantity);
+      if (isProductInCart) {
+        localStorage.setItem(`product_qty_${id}`, navQuantity);
+      }
+    } else if (isProductInCart && cartQuantity > 0) {
+      // Product is in cart, use cart quantity
+      console.log("Using cart quantity:", cartQuantity);
+      setQty(cartQuantity);
+      localStorage.setItem(`product_qty_${id}`, cartQuantity);
+    } else {
+      // Product not in cart, reset to 1
+      console.log("Resetting to default quantity: 1");
+      setQty(1);
+      localStorage.removeItem(`product_qty_${id}`);
+    }
+  }, [id, location.state, isProductInCart, cartQuantity]);
+
+  // Listen for cart changes (when items are removed)
+  useEffect(() => {
+    const handleProductRemoved = (event) => {
+      if (event.detail?.productId === Number(id)) {
+        console.log("Product removed from cart, resetting quantity");
+        setQty(1);
+        localStorage.removeItem(`product_qty_${id}`);
+      }
+    };
+
+    const handleCartCleared = () => {
+      console.log("Cart cleared, resetting quantity");
+      setQty(1);
+      localStorage.removeItem(`product_qty_${id}`);
+    };
+
+    window.addEventListener('productRemovedFromCart', handleProductRemoved);
+    window.addEventListener('cartCleared', handleCartCleared);
+
+    return () => {
+      window.removeEventListener('productRemovedFromCart', handleProductRemoved);
+      window.removeEventListener('cartCleared', handleCartCleared);
+    };
+  }, [id]);
+
   const images = useMemo(() => {
     if (!product) return [];
     const base = [product.image, product.hoverImage].filter(Boolean);
@@ -17,6 +92,20 @@ function ProductDetail() {
   }, [product]);
 
   const [mainImage, setMainImage] = useState(product ? product.image : "");
+
+  const handleAddToCart = () => {
+    console.log("Adding to cart with quantity:", qty);
+
+    addToCart({
+      id: product.id,
+      image: product.image,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+      swatches: product.swatches || [],
+      qty: qty,
+    });
+  };
 
   useEffect(() => {
     if (!product) return;
@@ -76,9 +165,23 @@ function ProductDetail() {
             <span>{qty}</span>
             <button onClick={() => setQty(qty + 1)}>+</button>
           </div>
-          <button className="add-cart">ADD TO CART</button>
+          <button type="button" className="add-to-cart-btn" onClick={handleAddToCart}>
+            <span>ADD TO CART</span>
+          </button>
           <button className="buy-now">BUY IT NOW</button>
         </div>
+
+        {/* ✅ FIXED: Only show quantity note when product is in cart */}
+        {isProductInCart && (
+          <div className="quantity-note" style={{ marginTop: "10px", padding: "8px", backgroundColor: "#e8f5e9", borderRadius: "4px", fontSize: "12px", color: "#2e7d32" }}>
+            <strong>📦 Current quantity in cart:</strong> {cartQuantity}
+          </div>
+        )}
+
+        {/* Show cart status */}
+        {/* <div className="cart-status" style={{ marginTop: "5px", fontSize: "11px", color: isProductInCart ? "#e63946" : "#666" }}>
+          {isProductInCart ? `🛒 In cart: ${cartQuantity} items` : "Not in cart"}
+        </div> */}
 
         <div className="action-links">
           <button type="button">♡ Add To Wishlist</button>
@@ -194,7 +297,7 @@ function ProductDetail() {
         <div className="payment-box">
           <p>Guarantee safe checkout</p>
           <div className="payment-logos">
-            <img src="https://qx-shooz.myshopify.com/cdn/shop/files/payments.jpg?v=1731652750&width=360" />
+            <img src="https://qx-shooz.myshopify.com/cdn/shop/files/payments.jpg?v=1731652750&width=360" alt="Payment methods" />
           </div>
         </div>
       </div>

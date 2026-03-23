@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import productsData from "../../../Products.json";
 import "./css/filterDrawer.css";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../Context/useCart";
 
 import {
   BsCartPlus,
@@ -33,6 +34,19 @@ function FilterDrawer() {
   const categories = [...new Set(productsData.map((p) => p.category))];
   const brands = [...new Set(productsData.map((p) => p.brand))];
   const colors = [...new Set(productsData.map((p) => p.color))];
+
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (product) => {
+    addToCart({
+      id: product.id,
+      image: product.image,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+      swatches: product.swatches || [],
+    });
+  };
 
   /* BODY SCROLL LOCK */
 
@@ -407,7 +421,10 @@ function FilterDrawer() {
                     <button
                       type="button"
                       className="add-to-cart-btn"
-                      onClick={stopCardClick}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddToCart(product);
+                      }}
                     >
                       <BsCartPlus />
                       <span>ADD TO CART</span>

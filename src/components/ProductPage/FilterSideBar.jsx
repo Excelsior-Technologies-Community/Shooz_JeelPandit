@@ -4,10 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import "./css/filterSide.css";
 import { BsCartPlus, BsEye, BsHeart } from "react-icons/bs";
 import { FaExchangeAlt } from "react-icons/fa";
+import { useCart } from "../../Context/useCart";
 
 function FilterSideBar() {
   const navigate = useNavigate();
   const maxPrice = Math.ceil(Math.max(...productsData.map((p) => p.price)));
+
+  const { addToCart } = useCart();  // Just get addToCart
 
   const [filters, setFilters] = useState({
     category: [],
@@ -24,6 +27,17 @@ function FilterSideBar() {
   const categories = [...new Set(productsData.map((p) => p.category))];
   const brands = [...new Set(productsData.map((p) => p.brand))];
   const colors = [...new Set(productsData.map((p) => p.color))];
+
+  // Simple add to cart function - exactly like ProductCard
+  const handleAddToCart = (product) => {
+    addToCart({
+      id: product.id,
+      image: product.image,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+    });
+  };
 
   const handleFilterChange = (type, value) => {
     if (type === "priceRange") {
@@ -453,7 +467,10 @@ function FilterSideBar() {
                     <button
                       type="button"
                       className="add-to-cart-btn"
-                      onClick={stopCardClick}
+                      onClick={(e) => {
+                        e.stopPropagation();  // Only add this line
+                        handleAddToCart(product);
+                      }}
                     >
                       <BsCartPlus />
                       <span>ADD TO CART</span>

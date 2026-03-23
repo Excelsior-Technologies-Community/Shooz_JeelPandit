@@ -1,13 +1,19 @@
-﻿﻿import { useEffect, useState } from "react";
+﻿import { useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./css/header.css";
+import { CartContext } from "../../Context/CartContext";
+import CartOffcanvas from "../CartOffcanvas/CartOffcanvas";
+
 
 const Header = () => {
   const BUY_NOW_URL = "https://qx-shooz.myshopify.com/collections/all";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileSection, setOpenMobileSection] = useState(null);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const location = useLocation();
+  const { getUniqueItemsCount } = useContext(CartContext); // Fixed: get only once
+  const cartCount = getUniqueItemsCount(); // Fixed: use the function
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
@@ -95,9 +101,8 @@ const Header = () => {
               {/* SHOP */}
               <li className="nav-item position-static">
                 <a
-                  className={`nav-link ${
-                    isPathActive(shopPaths) ? "active-main-menu" : ""
-                  }`}
+                  className={`nav-link ${isPathActive(shopPaths) ? "active-main-menu" : ""
+                    }`}
                   href="#"
                 >
                   Shop <i className="bi bi-chevron-down small"></i>
@@ -180,9 +185,8 @@ const Header = () => {
               {/* PRODUCT */}
               <li className="nav-item position-static">
                 <a
-                  className={`nav-link ${
-                    isPathActive(productPaths) ? "active-main-menu" : ""
-                  }`}
+                  className={`nav-link ${isPathActive(productPaths) ? "active-main-menu" : ""
+                    }`}
                   href="#"
                 >
                   Product <i className="bi bi-chevron-down small"></i>
@@ -250,9 +254,8 @@ const Header = () => {
               {/* BLOG */}
               <li className="nav-item position-static">
                 <a
-                  className={`nav-link ${
-                    isPathActive(blogPaths) ? "active-main-menu" : ""
-                  }`}
+                  className={`nav-link ${isPathActive(blogPaths) ? "active-main-menu" : ""
+                    }`}
                   href="#"
                 >
                   Blog <i className="bi bi-chevron-down small"></i>
@@ -336,9 +339,8 @@ const Header = () => {
               <li className="nav-item position-relative pages-item">
                 <a
                   href="#"
-                  className={`nav-link ${
-                    isPathActive(pagesPaths) ? "active-main-menu" : ""
-                  }`}
+                  className={`nav-link ${isPathActive(pagesPaths) ? "active-main-menu" : ""
+                    }`}
                 >
                   Pages <i className="bi bi-chevron-down small"></i>
                 </a>
@@ -392,9 +394,14 @@ const Header = () => {
                 <span className="badge bg-danger icon-badge">0</span>
               </div>
 
-              <div className="position-relative">
+              <div
+                className="position-relative"
+                style={{ cursor: "pointer" }}
+                onClick={() => setIsCartOpen(true)}
+
+              >
                 <i className="bi bi-bag"></i>
-                <span>(0)</span>
+                <span>({cartCount})</span>
               </div>
             </div>
           </div>
@@ -409,9 +416,13 @@ const Header = () => {
               <span className="badge bg-danger icon-badge">0</span>
             </div>
 
-            <div className="position-relative">
+            <div
+              className="position-relative"
+              style={{ cursor: "pointer" }}
+              onClick={() => setIsCartOpen(true)}
+            >
               <i className="bi bi-bag"></i>
-              <span>(0)</span>
+              <span>({cartCount})</span>
             </div>
           </div>
         </div>
@@ -449,19 +460,17 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className={`mobile-accordion-trigger ${
-                isPathActive(shopPaths) ? "active-main-menu" : ""
-              }`}
+              className={`mobile-accordion-trigger ${isPathActive(shopPaths) ? "active-main-menu" : ""
+                }`}
               onClick={() => toggleMobileSection("shop")}
               aria-expanded={openMobileSection === "shop"}
             >
               Shop
               <i
-                className={`bi ${
-                  openMobileSection === "shop"
-                    ? "bi-chevron-up"
-                    : "bi-chevron-down"
-                }`}
+                className={`bi ${openMobileSection === "shop"
+                  ? "bi-chevron-up"
+                  : "bi-chevron-down"
+                  }`}
               ></i>
             </button>
             <ul
@@ -479,19 +488,17 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className={`mobile-accordion-trigger ${
-                isPathActive(pagesPaths) ? "active-main-menu" : ""
-              }`}
+              className={`mobile-accordion-trigger ${isPathActive(pagesPaths) ? "active-main-menu" : ""
+                }`}
               onClick={() => toggleMobileSection("product")}
               aria-expanded={openMobileSection === "product"}
             >
               Product
               <i
-                className={`bi ${
-                  openMobileSection === "product"
-                    ? "bi-chevron-up"
-                    : "bi-chevron-down"
-                }`}
+                className={`bi ${openMobileSection === "product"
+                  ? "bi-chevron-up"
+                  : "bi-chevron-down"
+                  }`}
               ></i>
             </button>
             <ul
@@ -509,19 +516,17 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className={`mobile-accordion-trigger ${
-                isPathActive(blogPaths) ? "active-main-menu" : ""
-              }`}
+              className={`mobile-accordion-trigger ${isPathActive(blogPaths) ? "active-main-menu" : ""
+                }`}
               onClick={() => toggleMobileSection("blog")}
               aria-expanded={openMobileSection === "blog"}
             >
               Blog
               <i
-                className={`bi ${
-                  openMobileSection === "blog"
-                    ? "bi-chevron-up"
-                    : "bi-chevron-down"
-                }`}
+                className={`bi ${openMobileSection === "blog"
+                  ? "bi-chevron-up"
+                  : "bi-chevron-down"
+                  }`}
               ></i>
             </button>
             <ul
@@ -537,19 +542,17 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className={`mobile-accordion-trigger ${
-                isPathActive(pagesPaths) ? "active-main-menu" : ""
-              }`}
+              className={`mobile-accordion-trigger ${isPathActive(pagesPaths) ? "active-main-menu" : ""
+                }`}
               onClick={() => toggleMobileSection("pages")}
               aria-expanded={openMobileSection === "pages"}
             >
               Pages
               <i
-                className={`bi ${
-                  openMobileSection === "pages"
-                    ? "bi-chevron-up"
-                    : "bi-chevron-down"
-                }`}
+                className={`bi ${openMobileSection === "pages"
+                  ? "bi-chevron-up"
+                  : "bi-chevron-down"
+                  }`}
               ></i>
             </button>
             <ul
@@ -605,6 +608,9 @@ const Header = () => {
           </li>
         </ul>
       </aside>
+
+      {/* Cart Offcanvas */}
+      <CartOffcanvas isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 };

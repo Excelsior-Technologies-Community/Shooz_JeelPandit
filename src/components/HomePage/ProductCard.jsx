@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./css/productCard.css";
 import { FaExchangeAlt, FaRegEye, FaRegHeart, FaShoppingCart } from "react-icons/fa";
+import { useCart } from "../../Context/useCart";
 
 function ProductCard({
+  id,
   image,
   hoverImage,
   price,
@@ -11,6 +13,17 @@ function ProductCard({
   swatches = [],
   countdown = null,
 }) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({
+      id,
+      image,
+      price: Number(price),
+      title,
+      brand,
+    });
+  };
   const initialSeconds = useMemo(() => {
     if (!countdown) return null;
 
@@ -105,7 +118,11 @@ function ProductCard({
       </div>
 
       <div className="product-card-footer-actions">
-        <button type="button" className="add-to-cart-btn">
+        <button
+          type="button"
+          className="add-to-cart-btn"
+          onClick={handleAddToCart}
+        >
           <FaShoppingCart />
           <span>ADD TO CART</span>
         </button>

@@ -8,7 +8,7 @@ const AboutUs2Page = () => {
   return (
     <>
       <Header />
-      <Breadcrumb title="/About Us 2" />
+      <Breadcrumb title="/AboutUs2" />
       <AboutUs2 />
       <FooterSimple />
     </>
