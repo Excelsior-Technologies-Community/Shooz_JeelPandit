@@ -8,12 +8,14 @@ import {
   BsEye,
   BsFilter,
   BsHeart,
+  BsHeartFill,
   BsX,
   BsChevronLeft,
   BsChevronRight,
 } from "react-icons/bs";
 import { FaExchangeAlt } from "react-icons/fa";
 import { useCart } from "../../Context/useCart";
+import { useWishlist } from "../../Context/useWishlist";
 
 function FilterTopBar() {
   const navigate = useNavigate();
@@ -37,6 +39,7 @@ function FilterTopBar() {
   const [mobileFilterView, setMobileFilterView] = useState(null);
 
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   const handleAddToCart = (product) => {
     addToCart({
@@ -116,6 +119,19 @@ function FilterTopBar() {
 
   const stopCardClick = (event) => {
     event.stopPropagation();
+  };
+
+  const handleWishlistClick = (event, product) => {
+    event.stopPropagation();
+    toggleWishlist({
+      id: product.id,
+      image: product.image,
+      hoverImage: product.hoverImage,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+      swatches: product.swatches || [],
+    });
   };
 
   const updatePriceMin = (value) => {
@@ -537,8 +553,18 @@ function FilterTopBar() {
                       <button onClick={stopCardClick}>
                         <BsEye />
                       </button>
-                      <button onClick={stopCardClick}>
-                        <BsHeart />
+                      <button
+                        aria-label={
+                          isInWishlist(product.id)
+                            ? "Remove from wishlist"
+                            : "Add to wishlist"
+                        }
+                        onClick={(event) => handleWishlistClick(event, product)}
+                        style={{
+                          color: isInWishlist(product.id) ? "#e63946" : undefined,
+                        }}
+                      >
+                        {isInWishlist(product.id) ? <BsHeartFill /> : <BsHeart />}
                       </button>
                       <button onClick={stopCardClick}>
                         <FaExchangeAlt />

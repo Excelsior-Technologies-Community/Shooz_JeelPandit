@@ -3,11 +3,13 @@ import productsData from "../../../Products.json";
 import "./css/filterDrawer.css";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../Context/useCart";
+import { useWishlist } from "../../Context/useWishlist";
 
 import {
   BsCartPlus,
   BsEye,
   BsHeart,
+  BsHeartFill,
   BsFilter,
   BsX,
   BsChevronLeft,
@@ -36,6 +38,7 @@ function FilterDrawer() {
   const colors = [...new Set(productsData.map((p) => p.color))];
 
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   const handleAddToCart = (product) => {
     addToCart({
@@ -161,6 +164,19 @@ function FilterDrawer() {
 
   const stopCardClick = (event) => {
     event.stopPropagation();
+  };
+
+  const handleWishlistClick = (event, product) => {
+    event.stopPropagation();
+    toggleWishlist({
+      id: product.id,
+      image: product.image,
+      hoverImage: product.hoverImage,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+      swatches: product.swatches || [],
+    });
   };
 
   return (
@@ -434,10 +450,17 @@ function FilterDrawer() {
                         <BsEye />
                       </button>
                       <button
-                        aria-label="Add to wishlist"
-                        onClick={stopCardClick}
+                        aria-label={
+                          isInWishlist(product.id)
+                            ? "Remove from wishlist"
+                            : "Add to wishlist"
+                        }
+                        onClick={(event) => handleWishlistClick(event, product)}
+                        style={{
+                          color: isInWishlist(product.id) ? "#e63946" : undefined,
+                        }}
                       >
-                        <BsHeart />
+                        {isInWishlist(product.id) ? <BsHeartFill /> : <BsHeart />}
                       </button>
                       <button
                         aria-label="Compare product"

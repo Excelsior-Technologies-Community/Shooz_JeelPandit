@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import productsData from "../../../Products.json";
 import { Link, useNavigate } from "react-router-dom";
 import "./css/filterSide.css";
-import { BsCartPlus, BsEye, BsHeart } from "react-icons/bs";
+import { BsCartPlus, BsEye, BsHeart, BsHeartFill } from "react-icons/bs";
 import { FaExchangeAlt } from "react-icons/fa";
 import { useCart } from "../../Context/useCart";
+import { useWishlist } from "../../Context/useWishlist";
 
 function FilterSideBar() {
   const navigate = useNavigate();
   const maxPrice = Math.ceil(Math.max(...productsData.map((p) => p.price)));
 
-  const { addToCart } = useCart();  // Just get addToCart
+  const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   const [filters, setFilters] = useState({
     category: [],
@@ -77,6 +79,19 @@ function FilterSideBar() {
 
   const stopCardClick = (event) => {
     event.stopPropagation();
+  };
+
+  const handleWishlistClick = (event, product) => {
+    event.stopPropagation();
+    toggleWishlist({
+      id: product.id,
+      image: product.image,
+      hoverImage: product.hoverImage,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+      swatches: product.swatches || [],
+    });
   };
 
   /* ---------------- FILTER PRODUCTS ---------------- */
@@ -480,10 +495,17 @@ function FilterSideBar() {
                         <BsEye />
                       </button>
                       <button
-                        aria-label="Add to wishlist"
-                        onClick={stopCardClick}
+                        aria-label={
+                          isInWishlist(product.id)
+                            ? "Remove from wishlist"
+                            : "Add to wishlist"
+                        }
+                        onClick={(event) => handleWishlistClick(event, product)}
+                        style={{
+                          color: isInWishlist(product.id) ? "#e63946" : undefined,
+                        }}
                       >
-                        <BsHeart />
+                        {isInWishlist(product.id) ? <BsHeartFill /> : <BsHeart />}
                       </button>
                       <button
                         aria-label="Compare product"

@@ -1,0 +1,139 @@
+.wishlist-page {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 10px 58px 80px;
+}
+
+.wishlist-page__title {
+  margin: 0 0 70px;
+  text-align: center;
+  font-size: 38px;
+  font-weight: 600;
+  color: #111;
+}
+
+.wishlist-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.wishlist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  min-width: 0;
+}
+
+.wishlist-item__image {
+  width: 124px;
+  height: 136px;
+  background: #faf9f7;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wishlist-item__image img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  display: block;
+}
+
+.wishlist-item__content {
+  padding-top: 4px;
+}
+
+.wishlist-item__title {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #1b2a41;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.wishlist-item__title:hover {
+  color: #111;
+}
+
+.wishlist-item__price {
+  margin: 0 0 12px;
+  font-size: 19px;
+  color: #1f2d3d;
+}
+
+.wishlist-item__remove {
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: #7c8794;
+  font-size: 16px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.wishlist-item__remove:hover {
+  color: #111;
+}
+
+.wishlist-empty {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.wishlist-empty h2 {
+  margin-bottom: 10px;
+}
+
+.wishlist-empty p {
+  margin-bottom: 24px;
+  color: #666;
+}
+
+.wishlist-empty__link {
+  color: #111;
+  text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+  .wishlist-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .wishlist-page {
+    padding: 20px 20px 60px;
+  }
+
+  .wishlist-page__title {
+    margin-bottom: 40px;
+    font-size: 30px;
+  }
+
+  .wishlist-list {
+    grid-template-columns: 1fr;
+  }
+
+  .wishlist-item {
+    gap: 18px;
+  }
+
+  .wishlist-item__image {
+    width: 92px;
+    height: 104px;
+  }
+
+  .wishlist-item__image img {
+    width: 68px;
+    height: 68px;
+  }
+
+  .wishlist-item__title {
+    font-size: 22px;
+  }
+}

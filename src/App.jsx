@@ -10,6 +10,7 @@ import ListItemOverlayPage from "./Pages/ListItemOverlayPage";
 import GridItemBoxPage from "./Pages/GridItemBoxPage";
 import AboutUs1Page from "./Pages/AboutUs1Page";
 import AboutUs2Page from "./Pages/AboutUs2Page";
+import WishlistPage from "./Pages/WishlistPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="/GridItemBoxPage" element={<GridItemBoxPage />} />
       <Route path="/AboutUs1Page" element={<AboutUs1Page />} />
       <Route path="/AboutUs2Page" element={<AboutUs2Page />} />
+      <Route path="/wishlist" element={<WishlistPage />} />
     </Routes>
   );
 }

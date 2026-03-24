@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./css/productCard.css";
-import { FaExchangeAlt, FaRegEye, FaRegHeart, FaShoppingCart } from "react-icons/fa";
+import { FaExchangeAlt, FaHeart, FaRegEye, FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import { useCart } from "../../Context/useCart";
+import { useWishlist } from "../../Context/useWishlist";
 
 function ProductCard({
   id,
@@ -14,11 +15,24 @@ function ProductCard({
   countdown = null,
 }) {
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const wishlistActive = isInWishlist(id);
 
   const handleAddToCart = () => {
     addToCart({
       id,
       image,
+      price: Number(price),
+      title,
+      brand,
+    });
+  };
+
+  const handleWishlistToggle = () => {
+    toggleWishlist({
+      id,
+      image,
+      hoverImage,
       price: Number(price),
       title,
       brand,
@@ -129,10 +143,16 @@ function ProductCard({
 
         <div className="product-card-action-icons" aria-label="Quick product actions">
           <button type="button" aria-label="Quick view">
+            
             <FaRegEye />
           </button>
-          <button type="button" aria-label="Add to wishlist">
-            <FaRegHeart />
+          <button
+            type="button"
+            aria-label={wishlistActive ? "Remove from wishlist" : "Add to wishlist"}
+            onClick={handleWishlistToggle}
+            style={{ color: wishlistActive ? "#e63946" : undefined }}
+          >
+            {wishlistActive ? <FaHeart /> : <FaRegHeart />}
           </button>
           <button type="button" aria-label="Compare product">
             <FaExchangeAlt />

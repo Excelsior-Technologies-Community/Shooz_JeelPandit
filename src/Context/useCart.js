@@ -1,3 +1,6 @@
+
+//  hook handles cart actions and shared reactive state
+
 import { useContext } from "react";
 import { CartContext } from "./CartContext";
 

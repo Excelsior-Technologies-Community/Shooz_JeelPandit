@@ -4,12 +4,14 @@ import { useParams, useLocation } from "react-router-dom";
 import "./css/productDetail.css";
 import { BsBoxSeam, BsFacebook, BsTwitter, BsPinterest } from "react-icons/bs";
 import { useCart } from "../../Context/useCart";
+import { useWishlist } from "../../Context/useWishlist";
 
 function ProductDetail() {
   const { id } = useParams();
   const location = useLocation();
   const product = productsData.find((p) => p.id === Number(id));
   const { cart, addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   const [qty, setQty] = useState(1);
 
@@ -92,6 +94,7 @@ function ProductDetail() {
   }, [product]);
 
   const [mainImage, setMainImage] = useState(product ? product.image : "");
+  const wishlistActive = isInWishlist(Number(id));
 
   const handleAddToCart = () => {
     console.log("Adding to cart with quantity:", qty);
@@ -104,6 +107,20 @@ function ProductDetail() {
       brand: product.brand,
       swatches: product.swatches || [],
       qty: qty,
+    });
+  };
+
+  const handleWishlistToggle = () => {
+    if (!product) return;
+
+    toggleWishlist({
+      id: product.id,
+      image: product.image,
+      hoverImage: product.hoverImage,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+      swatches: product.swatches || [],
     });
   };
 
@@ -184,7 +201,9 @@ function ProductDetail() {
         </div> */}
 
         <div className="action-links">
-          <button type="button">♡ Add To Wishlist</button>
+          <button type="button" onClick={handleWishlistToggle}>
+            {wishlistActive ? "Remove From Wishlist" : "Add To Wishlist"}
+          </button>
           <button type="button">⇄ Compare</button>
         </div>
 

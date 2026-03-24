@@ -4,7 +4,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./css/header.css";
 import { CartContext } from "../../Context/CartContext";
 import CartOffcanvas from "../CartOffcanvas/CartOffcanvas";
-
+import { useWishlist } from "../../Context/useWishlist";
 
 const Header = () => {
   const BUY_NOW_URL = "https://qx-shooz.myshopify.com/collections/all";
@@ -12,8 +12,10 @@ const Header = () => {
   const [openMobileSection, setOpenMobileSection] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const location = useLocation();
-  const { getUniqueItemsCount } = useContext(CartContext); // Fixed: get only once
-  const cartCount = getUniqueItemsCount(); // Fixed: use the function
+  const { getUniqueItemsCount } = useContext(CartContext); 
+  const { wishlistCount } = useWishlist();
+
+  const cartCount = getUniqueItemsCount(); 
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
@@ -46,11 +48,7 @@ const Header = () => {
   const pagesPaths = [
     "/AboutUs1Page",
     "/AboutUs2Page",
-    "/about-us-3",
-    "/contact",
-    "/faqs",
-    "/lookbook",
-    "/sizeguide",
+    
     "/wishlist",
   ];
 
@@ -386,13 +384,22 @@ const Header = () => {
 
             {/* Right Icons Desktop */}
             <div className="d-none d-lg-flex align-items-center gap-3 nav-icons">
-              <i className="bi bi-search"></i>
+              <button
+                type="button"
+                className="header-icon-btn"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#headerSearchOffcanvas"
+                aria-controls="headerSearchOffcanvas"
+                aria-label="Open search"
+              >
+                <i className="bi bi-search"></i>
+              </button>
               <i className="bi bi-person"></i>
-
-              <div className="position-relative">
+            
+            <Link to="/wishlist" className="position-relative text-dark">
                 <i className="bi bi-heart"></i>
-                <span className="badge bg-danger icon-badge">0</span>
-              </div>
+                <span className="badge bg-danger icon-badge">{wishlistCount}</span>
+              </Link>
 
               <div
                 className="position-relative"
@@ -408,13 +415,22 @@ const Header = () => {
 
           {/* Right Icons Mobile */}
           <div className="d-flex d-lg-none align-items-center gap-3 nav-icons mobile-nav-icons">
-            <i className="bi bi-search"></i>
+            <button
+              type="button"
+              className="header-icon-btn"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#headerSearchOffcanvas"
+              aria-controls="headerSearchOffcanvas"
+              aria-label="Open search"
+            >
+              <i className="bi bi-search"></i>
+            </button>
             <i className="bi bi-person"></i>
 
-            <div className="position-relative">
+            <Link to="/wishlist" className="position-relative text-dark">
               <i className="bi bi-heart"></i>
-              <span className="badge bg-danger icon-badge">0</span>
-            </div>
+              <span className="badge bg-danger icon-badge">{wishlistCount}</span>
+            </Link>
 
             <div
               className="position-relative"
@@ -427,6 +443,40 @@ const Header = () => {
           </div>
         </div>
       </nav>
+
+      <div
+        className="offcanvas offcanvas-top header-search-offcanvas"
+        tabIndex="-1"
+        id="headerSearchOffcanvas"
+        aria-labelledby="headerSearchOffcanvasLabel"
+      >
+        <div className="offcanvas-header">
+          <div className="header-search-shell">
+            <p className="header-search-kicker">WHAT ARE YOU LOOKING FOR?</p>
+            <div className="header-search-input-wrap">
+              <input
+                type="search"
+                className="header-search-input"
+                placeholder="Search Products..."
+                aria-label="Search products"
+              />
+              <button
+                type="button"
+                className="header-search-submit"
+                aria-label="Search"
+              >
+                <i className="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
 
       <div
         className={`mobile-offcanvas-backdrop ${isMobileMenuOpen ? "show" : ""}`}
