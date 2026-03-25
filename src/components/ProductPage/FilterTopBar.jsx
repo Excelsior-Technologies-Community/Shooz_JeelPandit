@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import productsData from "../../../Products.json";
 import "./css/filterSide.css";
 import "./css/filterTopbar.css";
@@ -19,8 +19,11 @@ import { useWishlist } from "../../Context/useWishlist";
 
 function FilterTopBar() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const colorDropdownRef = useRef(null);
   const priceDropdownRef = useRef(null);
+  const rawSearchQuery = searchParams.get("search")?.trim() || "";
+  const searchQuery = rawSearchQuery.toLowerCase();
 
   const maxPrice = Math.ceil(Math.max(...productsData.map((p) => p.price)));
   const defaultFilters = {
@@ -98,8 +101,19 @@ function FilterTopBar() {
       filters.color === "all" || product.color === filters.color;
     const matchesPrice =
       product.price >= filters.priceMin && product.price <= filters.priceMax;
+    const matchesSearch =
+      !searchQuery ||
+      [product.title, product.brand, product.category, product.color]
+        .filter(Boolean)
+        .some((value) => String(value).toLowerCase().includes(searchQuery));
 
-    return matchesBrand && matchesCategory && matchesColor && matchesPrice;
+    return (
+      matchesBrand &&
+      matchesCategory &&
+      matchesColor &&
+      matchesPrice &&
+      matchesSearch
+    );
   });
 
   const sortFunctions = {
@@ -211,7 +225,9 @@ function FilterTopBar() {
   return (
     <div className="shop-container topbar-container">
       <div className="topbar-title">
-        <h1>Products</h1>
+        <h1>
+          {searchQuery ? `Search results for "${rawSearchQuery}"` : "Products"}
+        </h1>
       </div>
 
       <div className="topbar-filter-row">

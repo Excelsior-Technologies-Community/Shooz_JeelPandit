@@ -1,21 +1,28 @@
-﻿import { useEffect, useState, useContext } from "react";
+﻿import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Offcanvas from "bootstrap/js/dist/offcanvas";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./css/header.css";
 import { CartContext } from "../../Context/CartContext";
 import CartOffcanvas from "../CartOffcanvas/CartOffcanvas";
 import { useWishlist } from "../../Context/useWishlist";
+import products from "../../../Products.json";
+import ProfileModal from "../ProfileModal/ProfileModal";
 
 const Header = () => {
   const BUY_NOW_URL = "https://qx-shooz.myshopify.com/collections/all";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileSection, setOpenMobileSection] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const location = useLocation();
-  const { getUniqueItemsCount } = useContext(CartContext); 
+  const navigate = useNavigate();
+  const searchInputRef = useRef(null);
+  const { getUniqueItemsCount } = useContext(CartContext);
   const { wishlistCount } = useWishlist();
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
-  const cartCount = getUniqueItemsCount(); 
+  const cartCount = getUniqueItemsCount();
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
@@ -24,13 +31,74 @@ const Header = () => {
     };
   }, [isMobileMenuOpen]);
 
+  useEffect(() => {
+    const offcanvasElement = document.getElementById("headerSearchOffcanvas");
+
+    if (!offcanvasElement) return undefined;
+
+    const focusSearchInput = () => {
+      searchInputRef.current?.focus();
+    };
+
+    const resetSearch = () => {
+      setSearchQuery("");
+    };
+
+    offcanvasElement.addEventListener("shown.bs.offcanvas", focusSearchInput);
+    offcanvasElement.addEventListener("hidden.bs.offcanvas", resetSearch);
+
+    return () => {
+      offcanvasElement.removeEventListener(
+        "shown.bs.offcanvas",
+        focusSearchInput,
+      );
+      offcanvasElement.removeEventListener("hidden.bs.offcanvas", resetSearch);
+    };
+  }, []);
+
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setOpenMobileSection(null);
   };
 
+  const closeSearchOffcanvas = () => {
+    const offcanvasElement = document.getElementById("headerSearchOffcanvas");
+
+    if (!offcanvasElement) return;
+
+    Offcanvas.getOrCreateInstance(offcanvasElement).hide();
+  };
+
   const toggleMobileSection = (section) => {
     setOpenMobileSection((prev) => (prev === section ? null : section));
+  };
+
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+
+  const searchResults = useMemo(() => {
+    if (!normalizedSearchQuery) return [];
+
+    return products
+      .filter((product) =>
+        [product.title, product.brand, product.category, product.color]
+          .filter(Boolean)
+          .some((value) =>
+            String(value).toLowerCase().includes(normalizedSearchQuery),
+          ),
+      )
+      .slice(0, 3);
+  }, [normalizedSearchQuery]);
+
+  const handleSearchSubmit = () => {
+    if (!normalizedSearchQuery) return;
+
+    navigate(`/FilterTopBarPage?search=${encodeURIComponent(searchQuery.trim())}`);
+    closeSearchOffcanvas();
+  };
+
+  const handleSearchResultClick = (productId) => {
+    navigate(`/product/${productId}`);
+    closeSearchOffcanvas();
   };
 
   const shopPaths = [
@@ -45,19 +113,13 @@ const Header = () => {
     "/GridRightSideBarPage",
     "/GridItemBoxPage",
   ];
-  const pagesPaths = [
-    "/AboutUs1Page",
-    "/AboutUs2Page",
-    
-    "/wishlist",
-  ];
+  const pagesPaths = ["/AboutUs1Page", "/AboutUs2Page", "/wishlist"];
 
   const isPathActive = (paths) =>
     paths.some((path) => location.pathname.startsWith(path));
 
   return (
     <header>
-      {/* Top Bar */}
       <div className="top-bar py-2">
         <div className="container d-flex justify-content-between">
           <span className="small">One Day Delivery Available</span>
@@ -70,7 +132,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Navbar */}
       <nav className="navbar navbar-expand-lg bg-white">
         <div className="container">
           <button
@@ -88,7 +149,6 @@ const Header = () => {
           />
 
           <div className="collapse navbar-collapse" id="navbarContent">
-            {/* Center Menu */}
             <ul className="navbar-nav mx-auto gap-4">
               <li className="nav-item">
                 <NavLink className="nav-link" to="/" end>
@@ -96,11 +156,11 @@ const Header = () => {
                 </NavLink>
               </li>
 
-              {/* SHOP */}
               <li className="nav-item position-static">
                 <a
-                  className={`nav-link ${isPathActive(shopPaths) ? "active-main-menu" : ""
-                    }`}
+                  className={`nav-link ${
+                    isPathActive(shopPaths) ? "active-main-menu" : ""
+                  }`}
                   href="#"
                 >
                   Shop <i className="bi bi-chevron-down small"></i>
@@ -180,11 +240,11 @@ const Header = () => {
                 </div>
               </li>
 
-              {/* PRODUCT */}
               <li className="nav-item position-static">
                 <a
-                  className={`nav-link ${isPathActive(productPaths) ? "active-main-menu" : ""
-                    }`}
+                  className={`nav-link ${
+                    isPathActive(productPaths) ? "active-main-menu" : ""
+                  }`}
                   href="#"
                 >
                   Product <i className="bi bi-chevron-down small"></i>
@@ -249,11 +309,11 @@ const Header = () => {
                 </div>
               </li>
 
-              {/* BLOG */}
               <li className="nav-item position-static">
                 <a
-                  className={`nav-link ${isPathActive(blogPaths) ? "active-main-menu" : ""
-                    }`}
+                  className={`nav-link ${
+                    isPathActive(blogPaths) ? "active-main-menu" : ""
+                  }`}
                   href="#"
                 >
                   Blog <i className="bi bi-chevron-down small"></i>
@@ -333,12 +393,12 @@ const Header = () => {
                 </div>
               </li>
 
-              {/* PAGES */}
               <li className="nav-item position-relative pages-item">
                 <a
                   href="#"
-                  className={`nav-link ${isPathActive(pagesPaths) ? "active-main-menu" : ""
-                    }`}
+                  className={`nav-link ${
+                    isPathActive(pagesPaths) ? "active-main-menu" : ""
+                  }`}
                 >
                   Pages <i className="bi bi-chevron-down small"></i>
                 </a>
@@ -373,7 +433,6 @@ const Header = () => {
                 </div>
               </li>
 
-              {/* BUY NOW */}
               <li className="nav-item position-relative">
                 <a className="nav-link fw-semibold" href={BUY_NOW_URL}>
                   Buy Now
@@ -382,7 +441,6 @@ const Header = () => {
               </li>
             </ul>
 
-            {/* Right Icons Desktop */}
             <div className="d-none d-lg-flex align-items-center gap-3 nav-icons">
               <button
                 type="button"
@@ -394,18 +452,26 @@ const Header = () => {
               >
                 <i className="bi bi-search"></i>
               </button>
-              <i className="bi bi-person"></i>
-            
-            <Link to="/wishlist" className="position-relative text-dark">
+              
+              <button
+                type="button"
+                className="header-icon-btn"
+                onClick={() => setIsProfileModalOpen(true)}
+                style={{ background: 'none', border: 'none' }}
+              >
+                <i className="bi bi-person"></i>
+              </button>
+              <Link to="/wishlist" className="position-relative text-dark">
                 <i className="bi bi-heart"></i>
-                <span className="badge bg-danger icon-badge">{wishlistCount}</span>
+                <span className="badge bg-danger icon-badge">
+                  {wishlistCount}
+                </span>
               </Link>
 
               <div
                 className="position-relative"
                 style={{ cursor: "pointer" }}
                 onClick={() => setIsCartOpen(true)}
-
               >
                 <i className="bi bi-bag"></i>
                 <span>({cartCount})</span>
@@ -413,7 +479,6 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Right Icons Mobile */}
           <div className="d-flex d-lg-none align-items-center gap-3 nav-icons mobile-nav-icons">
             <button
               type="button"
@@ -425,8 +490,14 @@ const Header = () => {
             >
               <i className="bi bi-search"></i>
             </button>
-            <i className="bi bi-person"></i>
-
+              <button
+                type="button"
+                className="header-icon-btn"
+                onClick={() => setIsProfileModalOpen(true)}
+                style={{ background: 'none', border: 'none' }}
+              >
+                <i className="bi bi-person"></i>
+              </button>
             <Link to="/wishlist" className="position-relative text-dark">
               <i className="bi bi-heart"></i>
               <span className="badge bg-danger icon-badge">{wishlistCount}</span>
@@ -453,28 +524,81 @@ const Header = () => {
         <div className="offcanvas-header">
           <div className="header-search-shell">
             <p className="header-search-kicker">WHAT ARE YOU LOOKING FOR?</p>
+
             <div className="header-search-input-wrap">
               <input
-                type="search"
+                ref={searchInputRef}
+                type="text"
                 className="header-search-input"
                 placeholder="Search Products..."
                 aria-label="Search products"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    handleSearchSubmit();
+                  }
+                }}
               />
-              <button
-                type="button"
-                className="header-search-submit"
-                aria-label="Search"
-              >
-                <i className="bi bi-search"></i>
-              </button>
             </div>
+
+            {normalizedSearchQuery && (
+              <div className="header-search-results">
+                <p className="header-search-results-label">PRODUCTS</p>
+
+                {searchResults.length > 0 ? (
+                  <>
+                    <div className="header-search-results-list">
+                      {searchResults.map((product) => (
+                        <button
+                          key={product.id}
+                          type="button"
+                          className="header-search-result-card"
+                          onClick={() => handleSearchResultClick(product.id)}
+                        >
+                          <img
+                            src={product.image}
+                            alt={product.title}
+                            className="header-search-result-image"
+                          />
+                          <span className="header-search-result-content">
+                            <span className="header-search-result-title">
+                              {product.title}
+                            </span>
+                            <span className="header-search-result-price">
+                              ${Number(product.price).toFixed(2)}
+                            </span>
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="header-search-view-all"
+                      onClick={handleSearchSubmit}
+                    >
+                      <span>Search for "{searchQuery.trim()}"</span>
+                      <i className="bi bi-arrow-right"></i>
+                    </button>
+                  </>
+                ) : (
+                  <p className="header-search-empty">
+                    No products found for "{searchQuery.trim()}".
+                  </p>
+                )}
+              </div>
+            )}
           </div>
+
           <button
             type="button"
             className="btn-close"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
           ></button>
+
         </div>
       </div>
 
@@ -510,21 +634,25 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className={`mobile-accordion-trigger ${isPathActive(shopPaths) ? "active-main-menu" : ""
-                }`}
+              className={`mobile-accordion-trigger ${
+                isPathActive(shopPaths) ? "active-main-menu" : ""
+              }`}
               onClick={() => toggleMobileSection("shop")}
               aria-expanded={openMobileSection === "shop"}
             >
               Shop
               <i
-                className={`bi ${openMobileSection === "shop"
-                  ? "bi-chevron-up"
-                  : "bi-chevron-down"
-                  }`}
+                className={`bi ${
+                  openMobileSection === "shop"
+                    ? "bi-chevron-up"
+                    : "bi-chevron-down"
+                }`}
               ></i>
             </button>
             <ul
-              className={`mobile-submenu ${openMobileSection === "shop" ? "open" : ""}`}
+              className={`mobile-submenu ${
+                openMobileSection === "shop" ? "open" : ""
+              }`}
             >
               <li>Filter Sidebar</li>
               <li>Filter Top</li>
@@ -538,21 +666,25 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className={`mobile-accordion-trigger ${isPathActive(pagesPaths) ? "active-main-menu" : ""
-                }`}
+              className={`mobile-accordion-trigger ${
+                isPathActive(pagesPaths) ? "active-main-menu" : ""
+              }`}
               onClick={() => toggleMobileSection("product")}
               aria-expanded={openMobileSection === "product"}
             >
               Product
               <i
-                className={`bi ${openMobileSection === "product"
-                  ? "bi-chevron-up"
-                  : "bi-chevron-down"
-                  }`}
+                className={`bi ${
+                  openMobileSection === "product"
+                    ? "bi-chevron-up"
+                    : "bi-chevron-down"
+                }`}
               ></i>
             </button>
             <ul
-              className={`mobile-submenu ${openMobileSection === "product" ? "open" : ""}`}
+              className={`mobile-submenu ${
+                openMobileSection === "product" ? "open" : ""
+              }`}
             >
               <li>Thumbnails Bottom</li>
               <li>Thumbnails Left</li>
@@ -566,21 +698,25 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className={`mobile-accordion-trigger ${isPathActive(blogPaths) ? "active-main-menu" : ""
-                }`}
+              className={`mobile-accordion-trigger ${
+                isPathActive(blogPaths) ? "active-main-menu" : ""
+              }`}
               onClick={() => toggleMobileSection("blog")}
               aria-expanded={openMobileSection === "blog"}
             >
               Blog
               <i
-                className={`bi ${openMobileSection === "blog"
-                  ? "bi-chevron-up"
-                  : "bi-chevron-down"
-                  }`}
+                className={`bi ${
+                  openMobileSection === "blog"
+                    ? "bi-chevron-up"
+                    : "bi-chevron-down"
+                }`}
               ></i>
             </button>
             <ul
-              className={`mobile-submenu ${openMobileSection === "blog" ? "open" : ""}`}
+              className={`mobile-submenu ${
+                openMobileSection === "blog" ? "open" : ""
+              }`}
             >
               <li>Left Sidebar</li>
               <li>Right Sidebar</li>
@@ -592,21 +728,25 @@ const Header = () => {
           <li>
             <button
               type="button"
-              className={`mobile-accordion-trigger ${isPathActive(pagesPaths) ? "active-main-menu" : ""
-                }`}
+              className={`mobile-accordion-trigger ${
+                isPathActive(pagesPaths) ? "active-main-menu" : ""
+              }`}
               onClick={() => toggleMobileSection("pages")}
               aria-expanded={openMobileSection === "pages"}
             >
               Pages
               <i
-                className={`bi ${openMobileSection === "pages"
-                  ? "bi-chevron-up"
-                  : "bi-chevron-down"
-                  }`}
+                className={`bi ${
+                  openMobileSection === "pages"
+                    ? "bi-chevron-up"
+                    : "bi-chevron-down"
+                }`}
               ></i>
             </button>
             <ul
-              className={`mobile-submenu ${openMobileSection === "pages" ? "open" : ""}`}
+              className={`mobile-submenu ${
+                openMobileSection === "pages" ? "open" : ""
+              }`}
             >
               <li>
                 <Link to="/about-us-1" onClick={closeMobileMenu}>
@@ -659,8 +799,11 @@ const Header = () => {
         </ul>
       </aside>
 
-      {/* Cart Offcanvas */}
       <CartOffcanvas isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+        <ProfileModal 
+  isOpen={isProfileModalOpen} 
+  onClose={() => setIsProfileModalOpen(false)} 
+/>
     </header>
   );
 };

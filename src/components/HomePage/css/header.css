@@ -62,8 +62,8 @@
 }
 
 .header-search-offcanvas {
-  height: 160px !important;
-  max-height: 160px !important;
+  height: min(100vh, 500px) !important;
+  max-height: min(100vh, 500px) !important;
   border-bottom: 1px solid #ececec;
 }
 
@@ -71,7 +71,7 @@
   align-items: flex-start;
   justify-content: center;
   gap: 24px;
-  padding: 26px 48px 30px;
+  padding: 24px 48px 28px;
 }
 
 .header-search-kicker {
@@ -83,19 +83,19 @@
 }
 
 .header-search-shell {
-  width: min(100%, 560px);
+  width: min(100%, 880px);
 }
 
 .header-search-input-wrap {
   display: flex;
   align-items: center;
-  gap: 14px;
   border-bottom: 1px solid #d9d9d9;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 }
 
 .header-search-input {
   width: 100%;
+
   border: none;
   outline: none;
   box-shadow: none;
@@ -111,20 +111,89 @@
   opacity: 1;
 }
 
-.header-search-submit {
+.header-search-results {
+  padding-top: 16px;
+}
+
+.header-search-results-label {
+  margin: 0 0 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8e949d;
+}
+
+.header-search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header-search-result-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
   border: none;
   background: transparent;
   padding: 0;
+  text-align: left;
+}
+
+.header-search-result-image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f7f7f7;
+}
+
+.header-search-result-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.header-search-result-title {
+  font-size: 18px;
+  line-height: 1.2;
   color: #111;
 }
 
-.header-search-submit i {
+.header-search-result-price {
+  font-size: 14px;
+  color: #9b7f63;
+}
+
+.header-search-view-all {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 18px;
+  border: none;
+  background: #f3f3f3;
+  padding: 14px 18px;
+  font-size: 16px;
+  color: #6f6f6f;
+}
+
+.header-search-view-all i {
   font-size: 18px;
+  color: #8a8a8a;
+}
+
+.header-search-empty {
+  margin: 0;
+  padding: 20px 0 8px;
+  font-size: 15px;
+  color: #666;
 }
 
 .header-search-offcanvas .btn-close {
   margin: 8px 0 0;
   opacity: 1;
+  flex-shrink: 0;
 }
 
 .icon-badge {
@@ -429,8 +498,8 @@
   }
 
   .header-search-offcanvas {
-    height: 140px !important;
-    max-height: 140px !important;
+    height: min(100vh, 620px) !important;
+    max-height: min(100vh, 620px) !important;
   }
 
   .header-search-shell {
@@ -443,6 +512,28 @@
 
   .header-search-submit i {
     font-size: 16px;
+  }
+
+  .header-search-results {
+    padding-top: 14px;
+  }
+
+  .header-search-result-card {
+    gap: 12px;
+  }
+
+  .header-search-result-image {
+    width: 58px;
+    height: 58px;
+  }
+
+  .header-search-result-title {
+    font-size: 16px;
+  }
+
+  .header-search-view-all {
+    padding: 12px 14px;
+    font-size: 14px;
   }
 }
 
@@ -475,6 +566,28 @@
 
   .mobile-nav-icons span {
     font-size: 12px;
+  }
+
+  .header-search-kicker,
+  .header-search-results-label {
+    font-size: 11px;
+  }
+
+  .header-search-input-wrap {
+    gap: 0;
+  }
+
+  .header-search-result-title {
+    font-size: 15px;
+  }
+
+  .header-search-result-price {
+    font-size: 13px;
+  }
+
+  .header-search-view-all {
+    padding: 14px 16px;
+    font-size: 15px;
   }
 }
 

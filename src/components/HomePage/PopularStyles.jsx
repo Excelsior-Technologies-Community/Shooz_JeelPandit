@@ -1,5 +1,6 @@
 import React from "react";
 import "./css/popularStyles.css";
+import CircularText from './CircularText';
 
 function PopularStyles() {
   return (
@@ -32,7 +33,13 @@ function PopularStyles() {
             className="img-left"
             src="https://qx-shooz.myshopify.com/cdn/shop/files/video-pic.png?v=1731407733&width=1512"
             alt="Blue sneakers"
-          />
+                />
+                <CircularText
+               text="Fashion 2 Style Store"
+              onHover="slowDown"
+              spinDuration={9}
+              className="custom-class"
+              />
         </div>
       </div>
 
