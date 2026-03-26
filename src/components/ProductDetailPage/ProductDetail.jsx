@@ -3,8 +3,10 @@ import productsData from "../../../Products.json";
 import { useParams, useLocation } from "react-router-dom";
 import "./css/productDetail.css";
 import { BsBoxSeam, BsFacebook, BsTwitter, BsPinterest } from "react-icons/bs";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCart } from "../../Context/useCart";
 import { useWishlist } from "../../Context/useWishlist";
+import { useCompare } from "../../Context/useCompare";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -12,6 +14,7 @@ function ProductDetail() {
   const product = productsData.find((p) => p.id === Number(id));
   const { cart, addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { toggleCompare, isInCompare } = useCompare();
 
   const [qty, setQty] = useState(1);
 
@@ -22,21 +25,7 @@ function ProductDetail() {
   const cartItem = cart.find(item => item.id === Number(id));
   const cartQuantity = cartItem ? cartItem.qty : 0;
 
-  // Function to update quantity based on cart status
-  const updateQuantityFromCart = () => {
-    if (isProductInCart && cartQuantity > 0) {
-      // Product is in cart, use cart quantity
-      console.log("Product in cart, setting quantity to:", cartQuantity);
-      setQty(cartQuantity);
-      // Also update localStorage
-      localStorage.setItem(`product_qty_${id}`, cartQuantity);
-    } else {
-      // Product not in cart, reset to 1 and clear localStorage
-      console.log("Product not in cart, resetting quantity to 1");
-      setQty(1);
-      localStorage.removeItem(`product_qty_${id}`);
-    }
-  };
+ 
 
   // Initial load and when cart changes
   useEffect(() => {
@@ -62,7 +51,6 @@ function ProductDetail() {
     }
   }, [id, location.state, isProductInCart, cartQuantity]);
 
-  // Listen for cart changes (when items are removed)
   useEffect(() => {
     const handleProductRemoved = (event) => {
       if (event.detail?.productId === Number(id)) {
@@ -95,6 +83,7 @@ function ProductDetail() {
 
   const [mainImage, setMainImage] = useState(product ? product.image : "");
   const wishlistActive = isInWishlist(Number(id));
+  const compareActive = isInCompare(Number(id));
 
   const handleAddToCart = () => {
     console.log("Adding to cart with quantity:", qty);
@@ -121,6 +110,21 @@ function ProductDetail() {
       title: product.title,
       brand: product.brand,
       swatches: product.swatches || [],
+    });
+  };
+
+  const handleCompareToggle = () => {
+    if (!product) return;
+
+    toggleCompare({
+      id: product.id,
+      image: product.image,
+      hoverImage: product.hoverImage,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+      category: product.category,
+      Available: product.Available,
     });
   };
 
@@ -204,7 +208,14 @@ function ProductDetail() {
           <button type="button" onClick={handleWishlistToggle}>
             {wishlistActive ? "Remove From Wishlist" : "Add To Wishlist"}
           </button>
-          <button type="button">⇄ Compare</button>
+          <button
+            type="button"
+            onClick={handleCompareToggle}
+            aria-label={compareActive ? "Remove from compare" : "Add to compare"}
+            className={compareActive ? "active" : ""}
+          >
+            <FaArrowRightArrowLeft />
+          </button>
         </div>
 
         <div className="divider" />
@@ -325,3 +336,4 @@ function ProductDetail() {
 }
 
 export default ProductDetail;
+

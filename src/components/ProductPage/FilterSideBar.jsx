@@ -3,9 +3,10 @@ import productsData from "../../../Products.json";
 import { Link, useNavigate } from "react-router-dom";
 import "./css/filterSide.css";
 import { BsCartPlus, BsEye, BsHeart, BsHeartFill } from "react-icons/bs";
-import { FaExchangeAlt } from "react-icons/fa";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCart } from "../../Context/useCart";
 import { useWishlist } from "../../Context/useWishlist";
+import { useCompare } from "../../Context/useCompare";
 
 function FilterSideBar() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function FilterSideBar() {
 
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { toggleCompare, isInCompare } = useCompare();
 
   const [filters, setFilters] = useState({
     category: [],
@@ -91,6 +93,20 @@ function FilterSideBar() {
       title: product.title,
       brand: product.brand,
       swatches: product.swatches || [],
+    });
+  };
+
+  const handleCompareClick = (event, product) => {
+    event.stopPropagation();
+    toggleCompare({
+      id: product.id,
+      image: product.image,
+      hoverImage: product.hoverImage,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+      category: product.category,
+      Available: product.Available,
     });
   };
 
@@ -508,10 +524,17 @@ function FilterSideBar() {
                         {isInWishlist(product.id) ? <BsHeartFill /> : <BsHeart />}
                       </button>
                       <button
-                        aria-label="Compare product"
-                        onClick={stopCardClick}
+                        aria-label={
+                          isInCompare(product.id)
+                            ? "Remove from compare"
+                            : "Add to compare"
+                        }
+                        onClick={(event) => handleCompareClick(event, product)}
+                        style={{
+                          color: isInCompare(product.id) ? "#188038" : undefined,
+                        }}
                       >
-                        <FaExchangeAlt />
+                        <FaArrowRightArrowLeft />
                       </button>
                     </div>
                   </div>

@@ -153,6 +153,16 @@
   color: #444;
 }
 
+.action-links button.active {
+  color: #188038;
+  font-weight: 600;
+}
+
+.action-links button svg {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
 .product-meta {
   display: grid;
   gap: 8px;

@@ -4,6 +4,7 @@ import "./css/filterDrawer.css";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../Context/useCart";
 import { useWishlist } from "../../Context/useWishlist";
+import { useCompare } from "../../Context/useCompare";
 
 import {
   BsCartPlus,
@@ -15,7 +16,7 @@ import {
   BsChevronLeft,
   BsChevronRight,
 } from "react-icons/bs";
-import { FaExchangeAlt } from "react-icons/fa";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
 
 function FilterDrawer() {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ function FilterDrawer() {
 
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { toggleCompare, isInCompare } = useCompare();
 
   const handleAddToCart = (product) => {
     addToCart({
@@ -176,6 +178,20 @@ function FilterDrawer() {
       title: product.title,
       brand: product.brand,
       swatches: product.swatches || [],
+    });
+  };
+
+  const handleCompareClick = (event, product) => {
+    event.stopPropagation();
+    toggleCompare({
+      id: product.id,
+      image: product.image,
+      hoverImage: product.hoverImage,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+      category: product.category,
+      Available: product.Available,
     });
   };
 
@@ -463,10 +479,17 @@ function FilterDrawer() {
                         {isInWishlist(product.id) ? <BsHeartFill /> : <BsHeart />}
                       </button>
                       <button
-                        aria-label="Compare product"
-                        onClick={stopCardClick}
+                        aria-label={
+                          isInCompare(product.id)
+                            ? "Remove from compare"
+                            : "Add to compare"
+                        }
+                        onClick={(event) => handleCompareClick(event, product)}
+                        style={{
+                          color: isInCompare(product.id) ? "#188038" : undefined,
+                        }}
                       >
-                        <FaExchangeAlt />
+                        <FaArrowRightArrowLeft />
                       </button>
                     </div>
                   </div>

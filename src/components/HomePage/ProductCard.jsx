@@ -1,8 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./css/productCard.css";
-import { FaExchangeAlt, FaHeart, FaRegEye, FaRegHeart, FaShoppingCart } from "react-icons/fa";
+import { FaHeart, FaRegEye, FaRegHeart, FaShoppingCart } from "react-icons/fa";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../../Context/useCart";
 import { useWishlist } from "../../Context/useWishlist";
+import { useCompare } from "../../Context/useCompare";
 
 function ProductCard({
   id,
@@ -13,10 +16,15 @@ function ProductCard({
   brand,
   swatches = [],
   countdown = null,
+  category = "",
+  Available = true,
 }) {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { toggleCompare, isInCompare } = useCompare();
   const wishlistActive = isInWishlist(id);
+  const compareActive = isInCompare(id);
 
   const handleAddToCart = () => {
     addToCart({
@@ -37,6 +45,27 @@ function ProductCard({
       title,
       brand,
     });
+  };
+
+  const handleCompareToggle = () => {
+    toggleCompare({
+      id,
+      image,
+      hoverImage,
+      price: Number(price),
+      title,
+      brand,
+      category,
+      Available,
+    });
+  };
+
+  const handleCardClick = () => {
+    navigate(`/product/${id}`);
+  };
+
+  const stopCardClick = (event) => {
+    event.stopPropagation();
   };
   const initialSeconds = useMemo(() => {
     if (!countdown) return null;
@@ -84,7 +113,18 @@ function ProductCard({
   }, [remainingSeconds]);
 
   return (
-    <article className="product-card">
+    <article
+      className="product-card"
+      role="button"
+      tabIndex={0}
+      onClick={handleCardClick}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          handleCardClick();
+        }
+      }}
+    >
       <div className="product-card-media">
         <img className="product-card-main-image" src={image} alt={title} loading="lazy" />
         <img
@@ -135,27 +175,41 @@ function ProductCard({
         <button
           type="button"
           className="add-to-cart-btn"
-          onClick={handleAddToCart}
+          onClick={(event) => {
+            stopCardClick(event);
+            handleAddToCart();
+          }}
         >
           <FaShoppingCart />
           <span>ADD TO CART</span>
         </button>
 
         <div className="product-card-action-icons" aria-label="Quick product actions">
-          <button type="button" aria-label="Quick view">
+          <button type="button" aria-label="Quick view" onClick={stopCardClick}>
             
             <FaRegEye />
           </button>
           <button
             type="button"
             aria-label={wishlistActive ? "Remove from wishlist" : "Add to wishlist"}
-            onClick={handleWishlistToggle}
+            onClick={(event) => {
+              stopCardClick(event);
+              handleWishlistToggle();
+            }}
             style={{ color: wishlistActive ? "#e63946" : undefined }}
           >
             {wishlistActive ? <FaHeart /> : <FaRegHeart />}
           </button>
-          <button type="button" aria-label="Compare product">
-            <FaExchangeAlt />
+          <button
+            type="button"
+            aria-label={compareActive ? "Remove from compare" : "Add to compare"}
+            onClick={(event) => {
+              stopCardClick(event);
+              handleCompareToggle();
+            }}
+            style={{ color: compareActive ? "#188038" : undefined }}
+          >
+            <FaArrowRightArrowLeft />
           </button>
         </div>
       </div>

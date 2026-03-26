@@ -13,9 +13,10 @@ import {
   BsChevronLeft,
   BsChevronRight,
 } from "react-icons/bs";
-import { FaExchangeAlt } from "react-icons/fa";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCart } from "../../Context/useCart";
 import { useWishlist } from "../../Context/useWishlist";
+import { useCompare } from "../../Context/useCompare";
 
 function FilterTopBar() {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ function FilterTopBar() {
 
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { toggleCompare, isInCompare } = useCompare();
 
   const handleAddToCart = (product) => {
     addToCart({
@@ -145,6 +147,20 @@ function FilterTopBar() {
       title: product.title,
       brand: product.brand,
       swatches: product.swatches || [],
+    });
+  };
+
+  const handleCompareClick = (event, product) => {
+    event.stopPropagation();
+    toggleCompare({
+      id: product.id,
+      image: product.image,
+      hoverImage: product.hoverImage,
+      price: Number(product.price),
+      title: product.title,
+      brand: product.brand,
+      category: product.category,
+      Available: product.Available,
     });
   };
 
@@ -582,8 +598,18 @@ function FilterTopBar() {
                       >
                         {isInWishlist(product.id) ? <BsHeartFill /> : <BsHeart />}
                       </button>
-                      <button onClick={stopCardClick}>
-                        <FaExchangeAlt />
+                      <button
+                        aria-label={
+                          isInCompare(product.id)
+                            ? "Remove from compare"
+                            : "Add to compare"
+                        }
+                        onClick={(event) => handleCompareClick(event, product)}
+                        style={{
+                          color: isInCompare(product.id) ? "#188038" : undefined,
+                        }}
+                      >
+                        <FaArrowRightArrowLeft />
                       </button>
                     </div>
                   </div>

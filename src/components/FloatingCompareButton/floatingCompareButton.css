@@ -1,0 +1,60 @@
+.floating-compare-btn {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 1200;
+  border: 0;
+  border-radius: 12px 0 0 12px;
+  background: #0e0e0e;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px 5px 5px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.floating-compare-btn:hover {
+  background: #1b1b1b;
+  transform: translateY(-50%) translateX(-2px);
+}
+
+.floating-compare-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.floating-compare-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size:25px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+
+
+.floating-compare-count {
+  position: absolute;
+  top: -8px;
+  left: -10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #ff5a5a;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 991px) {
+  .floating-compare-btn {
+    display: none;
+  }
+}
