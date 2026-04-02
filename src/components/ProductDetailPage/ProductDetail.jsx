@@ -33,7 +33,7 @@ function ProductDetail() {
     const navQuantity = location.state?.selectedQuantity;
 
     if (navQuantity) {
-      console.log("Using navigation quantity:", navQuantity);
+      console.log("Using Navigation quantity:", navQuantity);
       setQty(navQuantity);
       if (isProductInCart) {
         localStorage.setItem(`product_qty_${id}`, navQuantity);
